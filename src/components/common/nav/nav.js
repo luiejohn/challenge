@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 
 import './nav.scss'
 
+import svg from '../../../assets/Icon/sprite.svg';
+
 const navigation = () => {
 
     return (
@@ -9,7 +11,7 @@ const navigation = () => {
             <div className="navigation">
                 <div className="navigation__cart">
                     <div className="navigation__cart__greet">
-                        Hi! Sign in or Register
+                        Hi! <span>Sign in</span> or <span>Register</span>
                     </div>
 
                     <div className="navigation__cart__deals">
@@ -29,7 +31,15 @@ const navigation = () => {
                             flag
                         </div>
                         <div className="navigation__cart__bag-sum">
-                            <div>icon</div>
+                            <div className="navigation__cart__bag-icon-container">
+                                <svg className="navigation__cart__bag-icon">
+                                    <use xlinkHref={`${svg}#icon-price-tag`}></use>
+                                </svg>
+                                <span className="navigation__cart__bag-count">
+                                    6
+                                </span>
+                            </div>
+
                             <div>
                                 Your Bag: $6.99
                             </div>
@@ -57,7 +67,14 @@ const navigation = () => {
                     </div>
 
                     <div className="navigation__nav__bag-icon">
-                        bag
+                        <div className="navigation__cart__bag-icon-container">
+                                <svg className="navigation__cart__bag-icon">
+                                    <use xlinkHref={`${svg}#icon-price-tag`}></use>
+                                </svg>
+                                <span className="navigation__cart__bag-count">
+                                    6
+                                </span>
+                            </div>
                     </div>
                 </div>
             </div>

@@ -2,12 +2,12 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.scss';
 
-import Navigation from './components/common/nav/nav';
+import Layout from './Layout/Layout';
 
 function App() {
   return (
     <div className="App">
-        <Navigation/>
+        <Layout />
     </div>
   );
 }
