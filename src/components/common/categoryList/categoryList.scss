@@ -1,0 +1,30 @@
+.category {
+    // background-color: #fff;
+    background-image: linear-gradient(to right, #b4b4b4, #6c6c6c);
+    padding: 6rem;
+
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: flex-start;
+
+
+    &__header {
+        font-size: 3.5rem;
+    }
+
+    &__list {
+        display: grid;
+        grid-auto-flow: column;
+        width: 100%;
+        grid-template-rows: repeat(6, 3rem);
+        grid-template-columns: repeat(3, 1fr);
+        
+        padding-top: 3rem;
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: 700;
+        text-align: left;
+        align-content: flex-start;
+    }
+}
