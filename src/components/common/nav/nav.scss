@@ -1,0 +1,90 @@
+.navigation {
+    display: flex;
+    flex-direction: column;
+
+    &__cart {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+
+        &__greet {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        &__deals {
+            display: flex;
+            // justify-content: space-evenly;
+
+            font-size: 1.4rem;
+            font-weight: 700;
+
+            & > *:not(:last-child) {
+                margin-right: 2rem;
+            }
+            
+        }
+
+        &__bag {
+            display: flex;
+
+            font-size: 1.4rem;
+            font-weight: 700;
+
+            & > *:not(:last-child) {
+                margin-right: 4.5rem;
+            }
+
+            &-sum{
+                display: flex;
+
+                & > *:not(:last-child) {
+                    margin-right: 2rem;
+                }
+            }
+        }
+    }
+
+
+
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background-color: #2e2e2e;
+        font-size: 1.7rem;
+        color: #fff;
+        padding: 2rem;
+
+        &__logo {
+            font-size: 2.4rem;
+
+            letter-spacing: .5rem;
+        }
+
+        &__navlist {
+            display: flex;
+
+            font-weight: 700;
+            
+         
+        
+            & > *:not(:last-child) {
+                margin-right: 2rem;
+            }
+        }
+
+
+        &__search {
+            background-color: #f2f2f2;
+            padding: 1rem 3rem;
+            border-radius: 100px;
+            
+
+            width: 30rem;
+        }
+
+    }
+}
