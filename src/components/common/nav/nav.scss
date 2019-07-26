@@ -8,6 +8,10 @@
         align-items: center;
         padding: 1.5rem;
 
+        font-family: 'Montserrat';
+        line-height: 240%;
+        color: #2e2e2e;
+
         &__greet {
             font-size: 1.4rem;
             font-weight: 700;
@@ -45,6 +49,7 @@
             &-sum{
                 display: flex;
                 align-items: center;
+                
 
                 & > *:not(:last-child) {
                     margin-right: 2rem;
@@ -54,7 +59,7 @@
 
             &-icon-container{
                 position: relative;
-
+                cursor: pointer;
                 // width: 4rem;
             }
 
@@ -69,8 +74,8 @@
                 align-items: center;
 
                 position: absolute;
-                top: -50%;
-                right: -100%;
+                top: -40%;
+                right: -80%;
 
                 height: 2rem;
                 width: 2rem;

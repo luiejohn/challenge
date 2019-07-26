@@ -66,13 +66,47 @@ html {
   // }
 
 
-  .btn-small {
+  .btn-sm {
     padding: 1rem 2rem;
     border-radius: 100px;
     border: none;
-    background-color: #f62f5e;
-    color: #fff;
+
     font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
   }
+
+.btn-md {
+  padding: 1.4rem 2.5rem;
+  border-radius: 100px;
+  border: none;
+
+  font-weight: 600;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #f62f5e;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: #f62f5e;
+}
+
+
+h1 {
+  font-family: 'PlayfairDisplay';
+  line-height: 150%;
+  font-size: 4.5rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: 'Open Sans';
+  line-height: 150%;
+  margin: 2rem 0;
+  font-size: 2.4rem;
+}

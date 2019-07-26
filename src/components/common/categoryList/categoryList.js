@@ -23,9 +23,12 @@ const category = () => {
                     <div> Jewelry </div>
                     <div> Joggers </div>
                     <div> Jumpers &amp; Cardigan </div>
-                    <div> Jumpers &amp; Cardigan </div>
-                    <div> Jumpers &amp; Cardigan </div>
-                    <div> Jumpers &amp; Cardigan </div>
+                    <div> Leather Jackets </div>
+                    <div> Long Sleeves T-Shirts </div>
+                    <div> Loungewear </div>
+                    <div> Oversize &amp; Longline </div>
+                    <div> Polo Shirts </div>
+                    <div> Shirts </div>
 
                 </div>
             </div>

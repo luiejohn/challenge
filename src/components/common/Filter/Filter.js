@@ -114,7 +114,7 @@ const Filter =  ({ className }) => {
 
 
                 <div className="filter__apply">
-                    <button className="btn-small"> Apply </button>
+                    <button className="btn-sm btn-primary"> Apply </button>
                     <div>Clear All</div>
                 </div>
 

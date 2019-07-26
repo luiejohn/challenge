@@ -33,7 +33,7 @@ const navigation = () => {
                         <div className="navigation__cart__bag-sum">
                             <div className="navigation__cart__bag-icon-container">
                                 <svg className="navigation__cart__bag-icon">
-                                    <use xlinkHref={`${svg}#icon-price-tag`}></use>
+                                    <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
                                 </svg>
                                 <span className="navigation__cart__bag-count">
                                     6
@@ -69,7 +69,7 @@ const navigation = () => {
                     <div className="navigation__nav__bag-icon">
                         <div className="navigation__cart__bag-icon-container">
                                 <svg className="navigation__cart__bag-icon">
-                                    <use xlinkHref={`${svg}#icon-price-tag`}></use>
+                                    <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
                                 </svg>
                                 <span className="navigation__cart__bag-count">
                                     6
