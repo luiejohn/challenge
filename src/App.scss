@@ -64,3 +64,15 @@ html {
   //     transform: rotate(360deg);
   //   }
   // }
+
+
+  .btn-small {
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    border: none;
+    background-color: #f62f5e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
