@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import './Filter.scss';
+import svg from '../../../assets/Icon/sprite.svg';
 
 const Filter =  ({ className }) => {
 
@@ -10,8 +11,27 @@ const Filter =  ({ className }) => {
                 <div className="filter__header">
                     <div className="filter__header-text">Filter 486 items</div>
 
-                    <div>Gender: Woman</div>
-                    <div>Gender: Dresses</div>
+                    <div className="filter__header-gender">
+                        <svg className="filter__header-icon">
+                            <use xlinkHref={`${svg}#icon-cross`}/>
+                        </svg>
+                        <div>
+                            <span>Gender: </span>
+                             Woman
+                        </div>
+                    </div>
+                    <div className="filter__header-cat">
+                        <svg className="filter__header-icon">
+                            <use xlinkHref={`${svg}#icon-cross`}/>
+                        </svg>
+                        <div>
+                            <span>
+                                Category: 
+                            </span>
+                             Dresses
+                        </div>
+
+                    </div>
                 </div>
 
                 <div className="filter__range">

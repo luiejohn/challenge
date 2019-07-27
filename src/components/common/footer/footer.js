@@ -24,17 +24,17 @@ const footer = () => {
                     </div>
                     <div>
                         <svg className="footer__icons-icon">
-                            <use xlinkHref={`${svg}#icon-instagram`} />
-                        </svg>
-                    </div>
-                    <div>
-                        <svg className="footer__icons-icon">
-                            <use xlinkHref={`${svg}#icon-instagram`} />
+                            <use xlinkHref={`${svg}#icon-pinterest`} />
                         </svg>
                     </div>
                     <div>
                         <svg className="footer__icons-icon">
                             <use xlinkHref={`${svg}#icon-twitter`} />
+                        </svg>
+                    </div>
+                    <div>
+                        <svg className="footer__icons-icon">
+                            <use xlinkHref={`${svg}#icon-facebook1`} />
                         </svg>
                     </div>
                 </div>

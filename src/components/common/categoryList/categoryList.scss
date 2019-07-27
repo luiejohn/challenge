@@ -22,12 +22,19 @@
         grid-template-rows: repeat(6, min-content);
         grid-template-columns: repeat(3, 1fr);
         grid-gap: .8rem;
-        
+        font-family: 'Montserrat';
+
+
         padding-top: 2rem;
         color: #fff;
         font-size: 1.4rem;
         font-weight: 700;
         text-align: left;
         align-content: flex-start;
+
+
+        & > * {
+            cursor: pointer;
+        }
     }
 }

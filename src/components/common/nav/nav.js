@@ -63,7 +63,13 @@ const navigation = () => {
                     </nav>
 
                     <div className="navigation__nav__search">
-                        search
+                        <input type="text" placeholder="Search Anything" className="navigation__nav__search-input"/>
+                        <svg className="navigation__nav__search-iconx">
+                            <use xlinkHref={`${svg}#icon-cross`} />
+                        </svg>
+                        <svg className="navigation__nav__search-icon">
+                            <use xlinkHref={`${svg}#icon-magnifying-glass`} />
+                        </svg>
                     </div>
 
                     <div className="navigation__nav__bag-icon">
