@@ -13,11 +13,14 @@ const Layout = () => {
         <Fragment>
             <Navigation />
 
-            <div className="container-center"> 
+            <div className="content">
+                <div className="container-center">
                     <Switch>
                         <Route exact path="/" component={Home}/> 
                     </Switch>      
                 </div>
+
+            </div>
             <Footer />
         </Fragment>
     )
