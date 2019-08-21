@@ -1,5 +1,8 @@
 .itemList2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-gap: 2rem;
+
     margin-top: 2rem;
-    min-height: 30rem;
-    border: 1px solid #ccc;
 }

@@ -7,6 +7,20 @@ const footer = () => {
 
     return(
         <Fragment>
+            <div style={{backgroundColor:'#f7f7f7'}}>
+                <div className="container-center">
+                    <div className="newsletter">
+                        <div>
+                            Subscribe for shop news, updates, and special offers
+                        </div>
+                        <div className="newsletter__send">
+                            <input placeholder="Your Email Here!" className="newsletter__input" />
+                            <button className="btn-sm btn-primary"> Subscribe </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <footer className="footer">
                 <div className="footer__navlist">
                     <div>Women</div>

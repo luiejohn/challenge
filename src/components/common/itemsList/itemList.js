@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import './itemList.scss';
 import Filter from './../Filter/Filter';
+import Card from './../card/card';
 
 const ItemList = () => {
 
@@ -9,10 +10,12 @@ const ItemList = () => {
         <Fragment>
             <div className="itemList">
                 <Filter className="itemList__filter"/>
-                <div>asd</div>
-                <div>asd</div>
-                <div>asd</div>
-                <div>asd</div>
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
             </div>
         </Fragment>
     )

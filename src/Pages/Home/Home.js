@@ -1,23 +1,42 @@
-import React, { Fragment } from 'react';
+import React from 'react'
 
+import './Home.scss'
+// import header from '../../assets/Icon/images-shoe3.png'
 
-import Category from './../../components/common/categoryList/categoryList';
-import ItemList from './../../components/common/itemsList/itemList';
-import ItemList2 from './../../components/common/itemList2/itemList2';
-import BrandHeader from './../../components/common/brandHeader/brandHeader';
 
 const Home = () => {
+    return (
+        <div>
+            <div className="home-header">
 
-    return(
-        <Fragment>
-            <Category />
-            <ItemList />
-            <ItemList2 />
-            <BrandHeader />
+            </div>
+            <div className="container-center">
+                <section className="discounts-container">
+                        <div className="discounts">
+                            <h1 className="discounts__banner">
+                                Check our store for exclusive discounts
+                            </h1>
+                            <div className="discounts__newsletter">
+                                sign up for exclusive sales and product news
 
-        </Fragment>
+                                <div className="discounts__inputs">
+                                    <input type="text" placeholder="Your email here" />
+                                    <button className="btn-sm btn-primary">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="check">
+                                <button className="btn-sm btn-secondary">
+                                    Check Twice
+                                </button>
+                        </div>
+                </section>
+            </div>
+        </div>
     )
-
 }
 
-export default Home;
+export default Home

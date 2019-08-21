@@ -3,8 +3,11 @@ import { Route, Switch } from 'react-router-dom';
 
 import './Layout.scss';
 
+
+
 import Navigation from './../components/common/nav/nav';
 import Footer from './../components/common/footer/footer';
+import CategoryPage from '../Pages/Category/Category';
 import Home from './../Pages/Home/Home';
 
 const Layout = () => {
@@ -14,12 +17,11 @@ const Layout = () => {
             <Navigation />
 
             <div className="content">
-                <div className="container-center">
                     <Switch>
+                        <Route exact path="/category" component={CategoryPage}/>
+                        <Route exact path="/item" component={Home}/>
                         <Route exact path="/" component={Home}/> 
                     </Switch>      
-                </div>
-
             </div>
             <Footer />
         </Fragment>

@@ -95,6 +95,7 @@
 
     &__nav-cont {
         background-color: #2e2e2e;
+        // position: relative;
     }
 
     &__nav {
@@ -182,11 +183,11 @@
                 width: 2rem;
                 height: 2rem;
                 fill: #fff;
+                cursor: pointer;
 
                 transition: all .3s;
             }
         }
-
 
         &__bag {
 
@@ -209,7 +210,6 @@
                     margin-right: 2rem;
                 }
             }
-
 
             &-icon-container{
                 position: relative;
@@ -247,7 +247,6 @@
                 padding: .5rem;
             }
         }
-
 
 
     }

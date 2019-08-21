@@ -1,7 +1,7 @@
 .content {
 
-    padding: 2rem;
-    background-color: #f7f7f7;
+    // padding: 2rem 0;
+    background-color: #fff;
 }
 
 // .container-center {
@@ -77,20 +77,14 @@
     }
   }
 
-//   @media (min-width: 1700px) {
-//     .container-center {
-//       width: 1680px;
-//     }
-//   }
+  @media (min-width: 1700px) {
+    .container-center {
+      width: 1690px;
+    }
+  }
 
   @media (min-width: 1800px) {
     .container-center {
       width: 1790px;
     }
   }
-
-//   @media (min-width: 1900px) {
-//     .container-center {
-//       width: 1880px;
-//     }
-//   } 

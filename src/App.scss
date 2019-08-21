@@ -20,13 +20,17 @@ html {
   // font-size: 87.5%;  //14px
   font-size: 75%; //12px
 
-  // @media only screen and (max-width: 1300px){
-  //     font-size: 50%;
-  // }
+  @media only screen and (max-width: 1500px){
+    font-size: 100%; //16px
+}
 
-  // @media only screen and (max-width: 1000px){
-  //     font-size: 45%;
-  // }
+  @media only screen and (max-width: 1300px){
+      font-size: 50%;
+  }
+
+  @media only screen and (max-width: 1000px){
+      font-size: 45%;
+  }
 
   // @media only screen and (max-width: 400px){
   //     font-size: 65%;
@@ -84,8 +88,8 @@ html {
 h1 {
   font-family: 'PlayfairDisplay';
   line-height: 150%;
-  font-size: 4.5rem;
-  font-weight: 600;
+  font-size: 4.8rem;
+  font-weight: 700;
 }
 
 h2 {

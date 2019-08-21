@@ -1,10 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import './nav.scss'
 
 import svg from '../../../assets/Icon/sprite.svg';
+import Cart from './../cart/cart';
 
-const navigation = () => {
+const Navigation = () => {
+
+    const [isCart, setCart] = useState(false);
+
 
     return (
         <Fragment>
@@ -33,7 +37,9 @@ const navigation = () => {
                                 flag
                             </div>
                             <div className="navigation__cart__bag-sum">
-                                <div className="navigation__cart__bag-icon-container">
+                                <div className="navigation__cart__bag-icon-container"
+                                    onClick={()=>setCart(!isCart)}
+                                >
                                     <svg className="navigation__cart__bag-icon">
                                         <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
                                     </svg>
@@ -89,7 +95,10 @@ const navigation = () => {
                             </div>
                         </div>
                     </div>
-
+                    
+                    <div className="container-center" style={{position: 'relative', margin: '0 auto'}}>
+                        <Cart className={ isCart ? "cart cart__show" : "cart cart__hide" } setCart={setCart} />
+                    </div>
                 </div>
 
                 
@@ -98,4 +107,4 @@ const navigation = () => {
     )
 }
 
-export default navigation;
+export default Navigation;

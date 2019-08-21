@@ -1,3 +1,33 @@
+.newsletter{
+    padding: 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2e2e2e;
+    text-transform: uppercase;
+    // font-family: 'Montserrat';
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #f7f7f7;
+
+    &__send {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+    &__input {
+        margin-right: 3rem;
+        padding: 1rem;
+        border-radius: 100px;
+        border: 1px solid #ccc;
+    }
+}
+
 .footer {
     display: flex;
     flex-direction: column;
