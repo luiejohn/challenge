@@ -9,6 +9,11 @@
 
     transition: all .3s;
 
+    &__topheader{
+        text-align: left;
+        color: #2e2e2e;
+    }
+
     &__header {
         margin-top: 2rem;
         padding: 2rem 0;
@@ -18,9 +23,11 @@
 
         border-bottom: 1px solid #ccc;
 
-        // &:first-child {
-        //     text-align: center;
-        // }
+        & > * {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
     }
 
     &__list {
@@ -29,7 +36,7 @@
 
 
     &__options {
-        padding: 2rem 3rem;
+        padding: 2rem 8rem;
         background-color: #f7f7f7;
 
         display: flex;
@@ -50,5 +57,5 @@
 }
 
 .padding-3 {
-    padding: 3rem 3rem 0 3rem;
+    padding: 3rem 8rem 0 8rem;
 }

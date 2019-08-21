@@ -3,17 +3,17 @@ import React, { Fragment } from 'react'
 import './cart.scss'
 import Item from './item/item';
 
-const Cart = ({className, setCart}) => {
 
+const Cart = ({className, setCart}) => {
 
     return (
         <Fragment>
                 <div className={className}>
                     <div className="padding-3">
-                        <h3>6 Items In Your Cart</h3>
+                        <h2 className="cart__topheader">6 Items In Your Cart</h2>
 
                         <div className="cart__header">
-                                <div>Item</div>
+                                <div style={{textAlign: 'left'}}>Item</div>
                                 <div>Size</div>
                                 <div>Quantity</div>
                                 <div>Price</div>

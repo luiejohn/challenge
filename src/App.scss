@@ -62,6 +62,14 @@ html {
     font-weight: 600;
     font-size: 1.1rem;
     cursor: pointer;
+
+    transition: all .3s;
+  }
+
+  .btn-sm:hover, .btn-md:hover {
+    transform: scale(1.1);
+    box-shadow: .3rem .3rem .8rem rgba(0,0,0, .2);
+    // transform: translateY(1rem);
   }
 
 .btn-md {
@@ -72,16 +80,24 @@ html {
   font-weight: 600;
   font-size: 1.3rem;
   cursor: pointer;
+
+  transition: all .3s;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary:active, .btn-primary:focus {
   background-color: #f62f5e;
   color: #fff;
+  outline: none;
 }
 
-.btn-secondary {
+.btn-secondary, .btn-secondary:active, .btn-secondary:focus {
   background-color: #fff;
   color: #f62f5e;
+  outline: none;
+}
+
+.align-left{
+  text-align: left;
 }
 
 

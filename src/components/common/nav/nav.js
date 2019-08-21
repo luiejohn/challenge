@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './nav.scss'
 
@@ -62,15 +63,27 @@ const Navigation = () => {
                     <div className="container-center">
                         <div className="navigation__nav">
                             <div className="navigation__nav__logo">
-                                SHOPMATE
+                                <Link to="/">
+                                    SHOPMATE                                
+                                </Link>
                             </div>
                             
                             <nav className="navigation__nav__navlist">
-                                <div>Women</div>
-                                <div>Men</div>
-                                <div>Kids</div>
-                                <div>Shoes</div>
-                                <div>Brands</div>
+                                <Link to="/category">
+                                    Women
+                                </Link>
+                                <Link to="/category">
+                                    Men
+                                </Link>
+                                <Link to="/category">
+                                    Kids
+                                </Link>
+                                <Link to="/category">
+                                    Shoes
+                                </Link>
+                                <Link to="/category">
+                                    Brands
+                                </Link>
                             </nav>
 
                             <div className="navigation__nav__search">

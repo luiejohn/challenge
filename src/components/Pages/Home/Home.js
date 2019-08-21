@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './Home.scss'
-// import header from '../../assets/Icon/images-shoe3.png'
+
 
 
 const Home = () => {
@@ -21,7 +21,7 @@ const Home = () => {
 
                                 <div className="discounts__inputs">
                                     <input type="text" placeholder="Your email here" />
-                                    <button className="btn-sm btn-primary">
+                                    <button className="btn-md btn-primary">
                                         Subscribe
                                     </button>
                                 </div>
@@ -29,7 +29,7 @@ const Home = () => {
                         </div>
 
                         <div className="check">
-                                <button className="btn-sm btn-secondary">
+                                <button className="btn-md btn-secondary">
                                     Check Twice
                                 </button>
                         </div>

@@ -3,12 +3,10 @@ import { Route, Switch } from 'react-router-dom';
 
 import './Layout.scss';
 
-
-
-import Navigation from './../components/common/nav/nav';
-import Footer from './../components/common/footer/footer';
-import CategoryPage from '../Pages/Category/Category';
-import Home from './../Pages/Home/Home';
+import Navigation from '../common/nav/nav'
+import Footer from '../common/footer/footer'
+import CategoryPage from '../Pages/Category/Category'
+import Home from '../Pages/Home/Home'
 
 const Layout = () => {
 
@@ -28,4 +26,4 @@ const Layout = () => {
     )
 }
 
-export default Layout;
+export default Layout; 

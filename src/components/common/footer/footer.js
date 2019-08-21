@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import './footer.scss';
 import svg from '../../../assets/Icon/sprite.svg';
 
-const footer = () => {
+const Footer = () => {
 
     return(
         <Fragment>
@@ -15,7 +15,7 @@ const footer = () => {
                         </div>
                         <div className="newsletter__send">
                             <input placeholder="Your Email Here!" className="newsletter__input" />
-                            <button className="btn-sm btn-primary"> Subscribe </button>
+                            <button className="btn-md btn-primary"> Subscribe </button>
                         </div>
                     </div>
                 </div>
@@ -62,4 +62,4 @@ const footer = () => {
     )
 }
 
-export default footer;
+export default Footer;
