@@ -71,17 +71,23 @@
     }
   } 
 
+  // @media (min-width: 1500px) {
+  //   .container-center {
+  //     width: 1490px;
+  //   }
+  // } 
+
   @media (min-width: 1600px) {
     .container-center {
       width: 1590px;
     }
   }
 
-  @media (min-width: 1700px) {
-    .container-center {
-      width: 1690px;
-    }
-  }
+  // @media (min-width: 1700px) {
+  //   .container-center {
+  //     width: 1690px;
+  //   }
+  // }
 
   @media (min-width: 1800px) {
     .container-center {

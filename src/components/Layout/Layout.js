@@ -7,6 +7,7 @@ import Navigation from '../common/nav/nav'
 import Footer from '../common/footer/footer'
 import CategoryPage from '../Pages/Category/Category'
 import Home from '../Pages/Home/Home'
+import ItemPage from './../Pages/Item/ItemPage';
 
 const Layout = () => {
 
@@ -17,7 +18,7 @@ const Layout = () => {
             <div className="content">
                     <Switch>
                         <Route exact path="/category" component={CategoryPage}/>
-                        <Route exact path="/item" component={Home}/>
+                        <Route exact path="/item" component={ItemPage}/>
                         <Route exact path="/" component={Home}/> 
                     </Switch>      
             </div>
