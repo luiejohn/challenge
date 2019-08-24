@@ -12,7 +12,7 @@ const ItemList2 = () => {
                 <Card />
                 <Card />
                 <Card />
-                {/* <Card /> */}
+                <Card />
             </div>
         </Fragment>
     )
