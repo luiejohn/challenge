@@ -9,10 +9,28 @@
 
     transition: all .3s;
 
+    &__countheader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     &__topheader{
         text-align: left;
         color: #2e2e2e;
     }
+    &__close {
+        justify-self: flex-end;
+        cursor: pointer;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 4rem;
+        width: 4rem;
+        fill: #2e2e2e;
+    }
+
 
     &__header {
         margin-top: 2rem;

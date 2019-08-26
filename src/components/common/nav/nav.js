@@ -96,7 +96,7 @@ const Navigation = () => {
                                 </svg>
                             </div>
 
-                            <div className="navigation__nav__bag-icon">
+                            {/* <div className="navigation__nav__bag-icon">
                                 <div className="navigation__nav__bag-icon-container">
                                         <svg className="navigation__nav__bag-icon">
                                             <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
@@ -105,7 +105,7 @@ const Navigation = () => {
                                             6
                                         </span>
                                     </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     
