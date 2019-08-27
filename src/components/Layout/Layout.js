@@ -18,7 +18,7 @@ const Layout = () => {
             <div className="content">
                     <Switch>
                         <Route exact path="/category" component={CategoryPage}/>
-                        <Route exact path="/item" component={ItemPage}/>
+                        <Route exact path="/category/item/:id" component={ItemPage}/>
                         <Route exact path="/" component={Home}/> 
                     </Switch>      
             </div>

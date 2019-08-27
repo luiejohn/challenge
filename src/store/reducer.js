@@ -1,10 +1,12 @@
 import * as actionTypes from './actions'
 
 const initialState = {
-    token: null
+    category: '',
 }
 
 const reducer = (state = initialState, action) => {
+
+    
 
 };
 

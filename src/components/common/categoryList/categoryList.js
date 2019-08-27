@@ -1,17 +1,25 @@
 import React, { Fragment } from 'react';
-
+import { categories } from './../../../store/dummy';
 import './categoryList.scss';
 
-const category = () => {
-
-
+const Category = () => {
     return(
         <Fragment>
             <div className="category">
                 <h1 className="category__header">Mens Wear</h1>
 
                 <div className="category__list">
-                    <div> Accessories </div>
+                    {
+                        categories.map( category => {
+                            return (
+                                <div key={category.id}>{ category.name}</div>
+                            )
+                        })
+                    }
+
+                </div>
+
+                    {/* <div> Accessories </div>
                     <div> ASOS Basic Tops </div>
                     <div> Bags </div>
                     <div> Caps &amp; Hats </div>
@@ -28,12 +36,10 @@ const category = () => {
                     <div> Loungewear </div>
                     <div> Oversize &amp; Longline </div>
                     <div> Polo Shirts </div>
-                    <div> Shirts </div>
-
-                </div>
+                    <div> Shirts </div> */}
             </div>
         </Fragment>
     )
 }
 
-export default category;
+export default Category;

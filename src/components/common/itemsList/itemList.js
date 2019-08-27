@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './itemList.scss';
 import Filter from './../Filter/Filter';
 import Card from './../card/card';
+import {items} from '../../../store/dummy';
+
 
 const ItemList = () => {
 
@@ -10,15 +13,16 @@ const ItemList = () => {
         <Fragment>
             <div className="itemList">
                 <Filter className="itemList__filter"/>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {
+                    items.map(item => {
+                        return (
+                            <Card key={item.id} item={item}/>
+                        )
+                    })
+                }
             </div>
         </Fragment>
     )
 }
 
-export default ItemList;
+export default withRouter(ItemList);

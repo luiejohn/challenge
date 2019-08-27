@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { withRouter } from 'react-router-dom';
 import './ItemPage.scss'
 
 import { Carousel } from 'react-responsive-carousel';
@@ -8,7 +8,8 @@ import shirt2 from '../../../assets/images/images-shirt12.png';
 import shirt3 from '../../../assets/images/images-shirt13.png';
 
 
-const ItemPage = () => {
+const ItemPage = (props) => {
+    // console.log(props);
     return (
         <div style={{backgroundColor:'#f7f7f7', padding: '2rem'}}>
 
@@ -89,4 +90,4 @@ const ItemPage = () => {
     )
 }
 
-export default ItemPage
+export default withRouter(ItemPage)

@@ -1,21 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import './Category.scss'
 
 import Category from '../../../components/common/categoryList/categoryList';
 import ItemList from '../../../components/common/itemsList/itemList';
-import ItemList2 from '../../../components/common/itemList2/itemList2';
+// import ItemList2 from '../../../components/common/itemList2/itemList2';
 import BrandHeader from '../../../components/common/brandHeader/brandHeader';
 
-const CategoryPage = () => {
-
+const CategoryPage = (props) => {
+    const [currentCategory, setCurrentCategory] = useState('');
     return(
         <Fragment>
             <div className="category-content">
                 <div className="container-center">
                     <Category />
                     <ItemList />
-                    <ItemList2 />
+                    {/* <ItemList2 /> */}
                     <BrandHeader />
                 </div>
 
@@ -39,4 +40,4 @@ const CategoryPage = () => {
 
 }
 
-export default CategoryPage;
+export default withRouter(CategoryPage);
