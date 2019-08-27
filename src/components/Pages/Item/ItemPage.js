@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom';
 import './ItemPage.scss'
 
@@ -10,6 +10,16 @@ import shirt3 from '../../../assets/images/images-shirt13.png';
 
 const ItemPage = (props) => {
     // console.log(props);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        // return () => {
+        //     cleanup
+        // };
+    }, [])
+
+
     return (
         <div style={{backgroundColor:'#f7f7f7', padding: '2rem'}}>
 

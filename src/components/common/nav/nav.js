@@ -1,15 +1,16 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './nav.scss'
 
 import svg from '../../../assets/Icon/sprite.svg';
 import Cart from './../cart/cart';
 
-const Navigation = () => {
+const Navigation = (props) => {
 
     const [isCart, setCart] = useState(false);
-
+    console.log(props)
 
     return (
         <Fragment>
@@ -69,19 +70,19 @@ const Navigation = () => {
                             </div>
                             
                             <nav className="navigation__nav__navlist">
-                                <Link to="/category">
+                                <Link to="/category" onClick={()=> props.setCurrentCategory('Women')}>
                                     Women
                                 </Link>
-                                <Link to="/category">
+                                <Link to="/category" onClick={()=> props.setCurrentCategory('Men')}>
                                     Men
                                 </Link>
-                                <Link to="/category">
+                                <Link to="/category" onClick={()=> props.setCurrentCategory('Kids')}>
                                     Kids
                                 </Link>
-                                <Link to="/category">
+                                <Link to="/category" onClick={()=> props.setCurrentCategory('Shoes')}>
                                     Shoes
                                 </Link>
-                                <Link to="/category">
+                                <Link to="/category" onClick={()=> props.setCurrentCategory('Brands')}>
                                     Brands
                                 </Link>
                             </nav>
@@ -120,4 +121,16 @@ const Navigation = () => {
     )
 }
 
-export default Navigation;
+const mapDispatchToProps = dispatch => {
+    return {
+        setCurrentCategory: (newCat) => dispatch({type: 'SET_CATEGORY', newCat })
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        currentCategory: state.currentCategory
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

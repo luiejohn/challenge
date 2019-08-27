@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import './Category.scss'
@@ -10,6 +10,15 @@ import BrandHeader from '../../../components/common/brandHeader/brandHeader';
 
 const CategoryPage = (props) => {
     const [currentCategory, setCurrentCategory] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+
+        // return () => {
+        //     cleanup
+        // };
+    }, [])
+
     return(
         <Fragment>
             <div className="category-content">
