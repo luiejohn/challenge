@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import './nav.scss'
 
@@ -70,19 +71,19 @@ const Navigation = (props) => {
                             </div>
                             
                             <nav className="navigation__nav__navlist">
-                                <Link to="/category" onClick={()=> props.setCurrentCategory('Women')}>
+                                <Link to={"/category/" + props.currentCategory} onClick={()=> props.setCurrentCategory('Women')}>
                                     Women
                                 </Link>
-                                <Link to="/category" onClick={()=> props.setCurrentCategory('Men')}>
+                                <Link to={"/category/" + props.currentCategory} onClick={()=> props.setCurrentCategory('Men')}>
                                     Men
                                 </Link>
-                                <Link to="/category" onClick={()=> props.setCurrentCategory('Kids')}>
+                                <Link to={"/category/" + props.currentCategory} onClick={()=> props.setCurrentCategory('Kids')}>
                                     Kids
                                 </Link>
-                                <Link to="/category" onClick={()=> props.setCurrentCategory('Shoes')}>
+                                <Link to={"/category/" + props.currentCategory} onClick={()=> props.setCurrentCategory('Shoes')}>
                                     Shoes
                                 </Link>
-                                <Link to="/category" onClick={()=> props.setCurrentCategory('Brands')}>
+                                <Link to={{pathname: props.match.url + "/category/" + props.currentCategory}} onClick={()=> props.setCurrentCategory('Brands')}>
                                     Brands
                                 </Link>
                             </nav>
@@ -133,4 +134,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Navigation);

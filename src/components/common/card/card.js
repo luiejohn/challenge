@@ -10,7 +10,7 @@ import svg from '../../../assets/Icon/sprite.svg'
 
 
 const Card = (props) => {
-    // console.log(props);
+    console.log(props);
     return (
         <div className="item-card">
             <div className="item-card__image">
@@ -35,11 +35,15 @@ const Card = (props) => {
                 <svg className="item-card__quickview__icon">
                     <use xlinkHref={`${svg}#icon-heart-outlined`}></use>
                 </svg>
-                <button className="btn-md btn-primary"> 
+                
                     <Link to={{
                         pathname: props.match.url + '/item/' + props.item.id,
-                    }}>Quick View</Link>
-                </button>
+                    }}>
+                        <button className="btn-md btn-primary"> 
+                            Quick View
+                        </button>
+                    </Link>
+                
             </div>
 
         </div>

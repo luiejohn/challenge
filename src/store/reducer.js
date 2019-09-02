@@ -1,7 +1,7 @@
 import * as actionTypes from './actions'
 
 const initialState = {
-    currentCategory: 'Men',
+    currentCategory: 'Women',
 }
 
 const reducer = (state = initialState, action) => {
