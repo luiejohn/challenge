@@ -1,80 +1,75 @@
 .cart {
-    position: absolute;
-    left:0;
-    // padding: 3rem 3rem 0 3rem;
-    background-color: #fff;
-    width: inherit;
-    box-shadow: .3rem .3rem 1rem rgba(0,0,0, .15);
-    z-index: 100;
+  position: absolute;
+  left: 0;
+  // padding: 3rem 3rem 0 3rem;
+  background-color: #fff;
+  width: inherit;
+  box-shadow: 0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.15);
+  z-index: 100;
 
-    transition: all .3s;
+  transition: all 0.3s;
 
-    &__countheader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  &__countheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__topheader {
+    text-align: left;
+    color: #2e2e2e;
+  }
+  &__close {
+    justify-self: flex-end;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 4rem;
+    width: 4rem;
+    fill: #2e2e2e;
+  }
+
+  &__header {
+    margin-top: 2rem;
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 40% repeat(3, 1fr);
+    grid-template-rows: repeat(3, min-content);
+
+    border-bottom: 1px solid #ccc;
+
+    & > * {
+      font-size: 1.8rem;
+      font-weight: 700;
     }
-    &__topheader {
-        text-align: left;
-        color: #2e2e2e;
-    }
-    &__close {
-        justify-self: flex-end;
-        cursor: pointer;
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  }
 
-        height: 4rem;
-        width: 4rem;
-        fill: #2e2e2e;
-    }
+  &__list {
+    padding: 2rem 0;
+  }
 
+  &__options {
+    padding: 2rem 8rem;
+    background-color: #f7f7f7;
 
-    &__header {
-        margin-top: 2rem;
-        padding: 2rem 0;
-        display: grid;
-        grid-template-columns: 40% repeat(3, 1fr);
-        grid-template-rows: repeat(3, min-content);
-
-        border-bottom: 1px solid #ccc;
-
-        & > * {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-    }
-
-    &__list {
-        padding: 2rem 0;
-    }
-
-    &__options {
-        padding: 2rem 8rem;
-        background-color: #f7f7f7;
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-
-    }
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .cart__hide {
-    visibility: hidden;
-    opacity: 0;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .cart__show {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .padding-3 {
-    padding: 3rem 8rem 0 8rem;
+  padding: 3rem 8rem 0 8rem;
 }

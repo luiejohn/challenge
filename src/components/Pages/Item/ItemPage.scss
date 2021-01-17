@@ -1,29 +1,28 @@
 .item {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 40% 1fr;
-    grid-template-rows: min-content;
-    grid-column-gap: 2rem;
-    
-    text-align: left;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    // box-shadow: .3rem .3rem .8rem rgba(0,0,0, .15);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  grid-template-rows: min-content;
+  grid-column-gap: 2rem;
 
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  // box-shadow: .3rem .3rem .8rem rgba(0,0,0, .15);
 
-    &__image {
-        border: 1px solid red;
-    }
+  &__image {
+    border: 1px solid red;
+  }
 
-    &__details {
-        // justify-self: start;
-        border: 1px solid blue;
-    }
+  &__details {
+    // justify-self: start;
+    border: 1px solid blue;
+  }
 }
 
 .prodrev {
-    text-align: left;
-    padding: 3rem 5rem;
-    border: 1px solid #ccc;
-    border-top: none;
+  text-align: left;
+  padding: 3rem 5rem;
+  border: 1px solid #ccc;
+  border-top: none;
 }

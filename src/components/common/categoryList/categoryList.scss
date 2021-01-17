@@ -1,40 +1,38 @@
 .category {
-    // background-color: #fff;
-    // background-image: linear-gradient(to right, #b4b4b4, #6c6c6c);
-    background-image: url('../../../assets//images/cat-header.png');
-    background-size: cover;
-    padding: 6rem;
+  // background-color: #fff;
+  // background-image: linear-gradient(to right, #b4b4b4, #6c6c6c);
+  background-image: url("../../../assets//images/cat-header.png");
+  background-size: cover;
+  padding: 6rem;
 
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: flex-start;
 
-    &__header {
-        color:#2E2E2E;
-        // font-size: 3.5rem;
+  &__header {
+    color: #2e2e2e;
+    // font-size: 3.5rem;
+  }
+
+  &__list {
+    display: grid;
+    grid-auto-flow: column;
+    width: 100%;
+    grid-template-rows: repeat(6, min-content);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.8rem;
+    font-family: "Montserrat";
+
+    padding-top: 2rem;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: left;
+    align-content: flex-start;
+
+    & > * {
+      cursor: pointer;
     }
-
-    &__list {
-        display: grid;
-        grid-auto-flow: column;
-        width: 100%;
-        grid-template-rows: repeat(6, min-content);
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: .8rem;
-        font-family: 'Montserrat';
-
-
-        padding-top: 2rem;
-        color: #fff;
-        font-size: 1.4rem;
-        font-weight: 700;
-        text-align: left;
-        align-content: flex-start;
-
-
-        & > * {
-            cursor: pointer;
-        }
-    }
+  }
 }

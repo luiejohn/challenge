@@ -20,13 +20,12 @@ html {
   // font-size: 87.5%;  //14px
   font-size: 75%; //12px
 
-
-  @media only screen and (max-width: 1300px){
-      font-size: 62.5%; //10px
+  @media only screen and (max-width: 1300px) {
+    font-size: 62.5%; //10px
   }
 
-  @media only screen and (max-width: 1100px){
-      font-size: 55%; //8.8px
+  @media only screen and (max-width: 1100px) {
+    font-size: 55%; //8.8px
   }
 
   // @media only screen and (max-width: 400px){
@@ -34,88 +33,90 @@ html {
   // }
 }
 
-  // .App-logo {
-  //   animation: App-logo-spin infinite 20s linear;
-  //   height: 40vmin;
-  //   pointer-events: none;
-  // }
+// .App-logo {
+//   animation: App-logo-spin infinite 20s linear;
+//   height: 40vmin;
+//   pointer-events: none;
+// }
 
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
 
-  // @keyframes App-logo-spin {
-  //   from {
-  //     transform: rotate(0deg);
-  //   }
-  //   to {
-  //     transform: rotate(360deg);
-  //   }
-  // }
+.btn-sm {
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  border: none;
+  font-family: "Montserrat";
 
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
 
-  .btn-sm {
-    padding: 1rem 2rem;
-    border-radius: 100px;
-    border: none;
-    font-family: 'Montserrat';
+  transition: all 0.3s;
+}
 
-    font-weight: 600;
-    font-size: 1.1rem;
-    cursor: pointer;
-
-    transition: all .3s;
-  }
-
-  .btn-sm:hover, .btn-md:hover {
-    transform: scale(1.1);
-    box-shadow: .3rem .3rem .8rem rgba(0,0,0, .2);
-    // transform: translateY(1rem);
-  }
+.btn-sm:hover,
+.btn-md:hover {
+  transform: scale(1.1);
+  box-shadow: 0.3rem 0.3rem 0.8rem rgba(0, 0, 0, 0.2);
+  // transform: translateY(1rem);
+}
 
 .btn-md {
   padding: 1.4rem 2rem;
   border-radius: 100px;
   border: none;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 
   font-weight: 600;
   font-size: 1.5rem;
   cursor: pointer;
 
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-.btn-primary, .btn-primary:active, .btn-primary:focus {
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
   background-color: #f62f5e;
   color: #fff;
   outline: none;
 }
 
-.btn-secondary, .btn-secondary:active, .btn-secondary:focus {
+.btn-secondary,
+.btn-secondary:active,
+.btn-secondary:focus {
   background-color: #fff;
   color: #f62f5e;
   outline: none;
 }
 
-.align-left{
+.align-left {
   text-align: left;
 }
 
-
 h1 {
-  font-family: 'PlayfairDisplay';
+  font-family: "PlayfairDisplay";
   line-height: 150%;
   font-size: 4.8rem;
   font-weight: 700;
 }
 
 h2 {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   line-height: 150%;
   margin: 2rem 0;
   font-size: 2.4rem;
 }
 
 h3 {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   line-height: 150%;
   font-size: 1.8rem;
 }

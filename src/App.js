@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 // import logo from './logo.svg';
-import './App.scss';
+import "./App.scss";
 
-import Layout from './components/Layout/Layout'
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
     <div className="App">
-        <Layout />
+      <Layout />
     </div>
   );
 }

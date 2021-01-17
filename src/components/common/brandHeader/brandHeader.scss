@@ -1,24 +1,24 @@
 .brand-header {
-    margin-top: 2rem;
-    padding: 6rem;
-    background-image: url('../../../assets/images/images-shoe2.png');
-    background-size: cover;
+  margin-top: 2rem;
+  padding: 6rem;
+  background-image: url("../../../assets/images/images-shoe2.png");
+  background-size: cover;
 
-    width: 100%;
-    text-align: left;
-    color:#fff;
+  width: 100%;
+  text-align: left;
+  color: #fff;
 
-    &__text {
-        font-family: 'PlayfairDisplay';
-        line-height: 150%;
-        font-size: 4.5rem;
-        font-weight: 900;
-    }
+  &__text {
+    font-family: "PlayfairDisplay";
+    line-height: 150%;
+    font-size: 4.5rem;
+    font-weight: 900;
+  }
 
-    &__desc {
-        font-family: 'Open Sans';
-        line-height: 150%;
-        margin: 2rem 0;
-        font-size: 2.5rem;
-    }
+  &__desc {
+    font-family: "Open Sans";
+    line-height: 150%;
+    margin: 2rem 0;
+    font-size: 2.5rem;
+  }
 }

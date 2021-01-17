@@ -1,58 +1,48 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment, useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-import { categories } from './../../../store/dummy';
-import './categoryList.scss';
+import { categories } from "./../../../store/dummy";
+import "./categoryList.scss";
 
-const Category = ( props ) => {
+const Category = (props) => {
+  // const [subCat, setSubCat] = useState([]);
 
-    // const [subCat, setSubCat] = useState([]);
+  // useEffect(() => {
+  //     setSubCat(categories.filter( category => {
+  //         return category.name === props.currentCategory
+  //         }
+  //     ))
 
-    // useEffect(() => {
-    //     setSubCat(categories.filter( category => {
-    //         return category.name === props.currentCategory
-    //         }
-    //     ))
+  //     // return () => {
+  //     //     cleanup
+  //     // };
+  // }, [])
 
-    //     // return () => {
-    //     //     cleanup
-    //     // };
-    // }, [])
+  const matchCategory = () => {
+    let newCategory = categories.filter((category) => {
+      return category.name === props.currentCategory;
+    });
 
+    return newCategory;
+  };
 
-    const matchCategory = () => {
-        
-        let newCategory = categories.filter(category => {
-            return category.name === props.currentCategory
-        })
-        
-        return newCategory
-    }
+  const renderCat = () => {
+    const subCat = matchCategory();
+    let component = subCat[0].subcat.map((category) => {
+      return <div key={category.id}>{category.name}</div>;
+    });
 
-    const renderCat = () => {
-        const subCat = matchCategory();
-        let component = subCat[0].subcat.map(category => {
-            return (
-                <div key={category.id}>{ category.name}</div>
-            )
-        })
+    return component;
+  };
 
-        return component
-    }
+  return (
+    <Fragment>
+      <div className="category">
+        <h1 className="category__header">{props.currentCategory} Wear</h1>
 
-    return(
-        <Fragment>
-            <div className="category">
-                <h1 className="category__header">{props.currentCategory} Wear</h1>
+        <div className="category__list">{renderCat()}</div>
 
-                <div className="category__list">
-                    {
-                        renderCat()
-                    }
-
-                </div>
-
-                    {/* <div> Accessories </div>
+        {/* <div> Accessories </div>
                     <div> ASOS Basic Tops </div>
                     <div> Bags </div>
                     <div> Caps &amp; Hats </div>
@@ -70,15 +60,15 @@ const Category = ( props ) => {
                     <div> Oversize &amp; Longline </div>
                     <div> Polo Shirts </div>
                     <div> Shirts </div> */}
-            </div>
-        </Fragment>
-    )
-}
+      </div>
+    </Fragment>
+  );
+};
 
-const mapStateToProps = state => {
-    return {
-        currentCategory: state.currentCategory
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    currentCategory: state.currentCategory,
+  };
+};
 
 export default connect(mapStateToProps)(Category);

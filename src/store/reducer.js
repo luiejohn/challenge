@@ -1,16 +1,16 @@
-import * as actionTypes from './actions'
+import * as actionTypes from "./actions";
 
 const initialState = {
-    currentCategory: 'Women',
-}
+  currentCategory: "Women",
+};
 
 const reducer = (state = initialState, action) => {
-    if( action.type === 'SET_CATEGORY') {
-        return {
-            currentCategory: action.newCat
-        }
-    }
-    return state;
+  if (action.type === "SET_CATEGORY") {
+    return {
+      currentCategory: action.newCat,
+    };
+  }
+  return state;
 };
 
 export default reducer;
