@@ -68,11 +68,11 @@ export const categories = [
     subcat: [
       {
         id: "wsb1",
-        name: "Accessories",
+        name: "Caps and Hats",
       },
       {
         id: "wsb2",
-        name: "ASOS Basic Top",
+        name: "Headbands",
       },
       {
         id: "wsb3",
@@ -80,63 +80,63 @@ export const categories = [
       },
       {
         id: "wsb4",
-        name: "Caps &amp; Hats",
+        name: "Head Tie / Scarves",
       },
       {
         id: "wsb5",
-        name: "Gifts",
+        name: "Shirts",
       },
       {
         id: "wsb6",
-        name: "Accessories",
+        name: "Bottoms",
       },
       {
         id: "wsb7",
-        name: "Accessories",
+        name: "Underwear",
       },
       {
         id: "wsb8",
-        name: "Accessories",
+        name: "Crop Tops",
       },
       {
         id: "wsb9",
-        name: "Accessories",
+        name: "Sweaters",
       },
       {
-        id: "wsb10",
+        id: "ksb10",
         name: "Accessories",
       },
       {
         id: "wsb11",
-        name: "Accessories",
+        name: "Tube Top",
       },
       {
         id: "wsb12",
-        name: "Accessories",
+        name: "Pants/Trousers",
       },
       {
         id: "wsb13",
-        name: "Accessories",
+        name: "Skirts",
       },
       {
         id: "wsb14",
-        name: "Accessories",
+        name: "Shorts",
       },
       {
         id: "wsb15",
-        name: "Accessories",
+        name: "Sarong",
       },
       {
         id: "wsb16",
-        name: "Accessories",
+        name: "Tights and Leggings",
       },
       {
         id: "wsb17",
-        name: "Accessories",
+        name: "Socks",
       },
       {
         id: "wsb18",
-        name: "Accessories",
+        name: "Dresses/Gowns",
       },
     ],
   },
@@ -146,74 +146,58 @@ export const categories = [
     subcat: [
       {
         id: "msb1",
-        name: "Accessories",
+        name: "Shirts",
       },
       {
         id: "msb2",
-        name: "Accessories",
+        name: "Pants",
       },
       {
         id: "msb3",
-        name: "Accessories",
+        name: "Caps and Hats",
       },
       {
         id: "msb4",
-        name: "Accessories",
+        name: "Jeans",
       },
       {
         id: "msb5",
-        name: "Accessories",
+        name: "Shorts",
       },
       {
         id: "msb6",
-        name: "Accessories",
+        name: "Coats",
       },
       {
         id: "msb7",
-        name: "Accessories",
+        name: "Jackets",
       },
       {
         id: "msb8",
-        name: "Accessories",
+        name: "Hoodies",
       },
       {
         id: "msb9",
-        name: "Accessories",
+        name: "Underwear",
       },
       {
         id: "msb10",
-        name: "Accessories",
+        name: "Socks",
       },
       {
         id: "msb11",
-        name: "Accessories",
+        name: "Sweaters",
       },
       {
         id: "msb12",
-        name: "Accessories",
+        name: "Vest",
       },
       {
         id: "msb13",
-        name: "Accessories",
+        name: "Ties",
       },
       {
         id: "msb14",
-        name: "Accessories",
-      },
-      {
-        id: "msb15",
-        name: "Accessories",
-      },
-      {
-        id: "msb16",
-        name: "Accessories",
-      },
-      {
-        id: "msb17",
-        name: "Accessories",
-      },
-      {
-        id: "msb18",
         name: "Accessories",
       },
     ],
@@ -224,39 +208,39 @@ export const categories = [
     subcat: [
       {
         id: "ksb1",
-        name: "Accessories",
+        name: "Bags",
       },
       {
         id: "ksb2",
-        name: "Accessories",
+        name: "Caps and Hats",
       },
       {
         id: "ksb3",
-        name: "Accessories",
+        name: "Kids Headbands",
       },
       {
         id: "ksb4",
-        name: "Accessories",
+        name: "Shirts",
       },
       {
         id: "ksb5",
-        name: "Accessories",
+        name: "Underwear",
       },
       {
         id: "ksb6",
-        name: "Accessories",
+        name: "Bottoms",
       },
       {
         id: "ksb7",
-        name: "Accessories",
+        name: "Sweaters",
       },
       {
         id: "ksb8",
-        name: "Accessories",
+        name: "Crop Tops",
       },
       {
         id: "ksb9",
-        name: "Accessories",
+        name: "Sweaters",
       },
       {
         id: "ksb10",
@@ -264,35 +248,19 @@ export const categories = [
       },
       {
         id: "ksb11",
-        name: "Accessories",
+        name: "Tube Top",
       },
       {
         id: "ksb12",
-        name: "Accessories",
+        name: "Pants/Trousers",
       },
       {
         id: "ksb13",
-        name: "Accessories",
+        name: "Skirts",
       },
       {
         id: "ksb14",
-        name: "Accessories",
-      },
-      {
-        id: "ksb15",
-        name: "Accessories",
-      },
-      {
-        id: "ksb16",
-        name: "Accessories",
-      },
-      {
-        id: "ksb17",
-        name: "Accessories",
-      },
-      {
-        id: "ksb18",
-        name: "Accessories",
+        name: "Shorts",
       },
     ],
   },
@@ -302,75 +270,35 @@ export const categories = [
     subcat: [
       {
         id: "ssb1",
-        name: "Accessories",
+        name: "Sports Shoes",
       },
       {
         id: "ssb2",
-        name: "Accessories",
+        name: "Sneakers",
       },
       {
         id: "ssb3",
-        name: "Accessories",
+        name: "Hiking Boots",
       },
       {
         id: "ssb4",
-        name: "Accessories",
+        name: "Running Shoes",
       },
       {
         id: "ssb5",
-        name: "Accessories",
+        name: "Combat Boots",
       },
       {
         id: "ssb6",
-        name: "Accessories",
+        name: "School Shoes",
       },
       {
         id: "ssb7",
-        name: "Accessories",
+        name: "Women's Heels",
       },
       {
         id: "ssb8",
-        name: "Accessories",
-      },
-      {
-        id: "ssb9",
-        name: "Accessories",
-      },
-      {
-        id: "ssb10",
-        name: "Accessories",
-      },
-      {
-        id: "ssb11",
-        name: "Accessories",
-      },
-      {
-        id: "ssb12",
-        name: "Accessories",
-      },
-      {
-        id: "ssb13",
-        name: "Accessories",
-      },
-      {
-        id: "ssb14",
-        name: "Accessories",
-      },
-      {
-        id: "ssb15",
-        name: "Accessories",
-      },
-      {
-        id: "ssb16",
-        name: "Accessories",
-      },
-      {
-        id: "ssb17",
-        name: "Accessories",
-      },
-      {
-        id: "ssb18",
-        name: "Accessories",
+        name: "Kids Shoes",
       },
     ],
   },
@@ -380,75 +308,71 @@ export const categories = [
     subcat: [
       {
         id: "bsb1",
-        name: "Accessories",
+        name: "Armani",
       },
       {
         id: "bsb2",
-        name: "Accessories",
+        name: "adidas",
       },
       {
         id: "bsb3",
-        name: "Accessories",
+        name: "adidas Originals",
       },
       {
         id: "bsb4",
-        name: "Accessories",
+        name: "Calvin Klein",
       },
       {
         id: "bsb5",
-        name: "Accessories",
+        name: "Crocs",
       },
       {
         id: "bsb6",
-        name: "Accessories",
+        name: "DC Comics",
       },
       {
         id: "bsb7",
-        name: "Accessories",
+        name: "Havaianas",
       },
       {
         id: "bsb8",
-        name: "Accessories",
+        name: "H&M",
       },
       {
         id: "bsb9",
-        name: "Accessories",
+        name: "Uniqlo",
       },
       {
         id: "bsb10",
-        name: "Accessories",
+        name: "Under Armour",
       },
       {
         id: "bsb11",
-        name: "Accessories",
+        name: "The North Face",
       },
       {
         id: "bsb12",
-        name: "Accessories",
+        name: "Levi Strauss",
       },
       {
         id: "bsb13",
-        name: "Accessories",
+        name: "Puma",
       },
       {
         id: "bsb14",
-        name: "Accessories",
+        name: "Tommy Hilfiger",
       },
       {
         id: "bsb15",
-        name: "Accessories",
+        name: "Gap",
       },
       {
         id: "bsb16",
-        name: "Accessories",
+        name: "Old Navy",
       },
       {
         id: "bsb17",
-        name: "Accessories",
-      },
-      {
-        id: "bsb18",
-        name: "Accessories",
+        name: "Skechers",
       },
     ],
   },
