@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
+import Button from "../button/button";
 
 import "./card.scss";
 
@@ -8,7 +9,11 @@ import Shirt from "../../../assets/images/christmas-seal.gif";
 import svg from "../../../assets/Icon/sprite.svg";
 
 const Card = (props) => {
-  console.log(props);
+  // console.log(props);
+  const [isWishList, wishList] = useState(false);
+
+  let heartIcon = isWishList ? "#icon-heart" : "#icon-heart-outlined";
+
   return (
     <div className="item-card">
       <div className="item-card__image">
@@ -21,21 +26,22 @@ const Card = (props) => {
         <div className="item-card__price">$14.99</div>
       </div>
 
-      {/* <div className="item-card__btn">
-                <button className="btn-sm btn-primary"> Buy Now </button>
-            </div> */}
-
       <div className="item-card__quickview">
-        <svg className="item-card__quickview__icon">
-          <use xlinkHref={`${svg}#icon-heart-outlined`}></use>
+        <svg
+          onMouseEnter={() => wishList(!isWishList)}
+          onMouseLeave={() => wishList(!isWishList)}
+          className="item-card__quickview__icon"
+        >
+          <use xlinkHref={`${svg}${heartIcon}`}></use>
         </svg>
 
         <Link
           to={{
             pathname: props.match.url + "/item/" + props.item.id,
           }}
+          style={{ textDecoration: "none" }}
         >
-          <button className="btn-md btn-primary">Quick View</button>
+          <Button primary>Quick View</Button>
         </Link>
       </div>
     </div>

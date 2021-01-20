@@ -6,6 +6,9 @@ import "react-input-range/lib/css/index.css";
 import Checkbox from "rc-checkbox";
 import "rc-checkbox/assets/index.css";
 import svg from "../../../assets/Icon/sprite.svg";
+import SizeFilter from "../SizeFilter/sizeFilter";
+import ColorSelector from "../colorSelector/colorSelector";
+import Button from "../button/button";
 
 const Filter = ({ className }) => {
   let [size, setSize] = useState("");
@@ -39,7 +42,8 @@ const Filter = ({ className }) => {
         </div>
 
         <div className="filter__range">
-          <div className="filter__range__colors">
+          <ColorSelector color={color} setColor={setColor} />
+          {/* <div className="filter__range__colors">
             <h3 className="filter__range__colors-text">Color</h3>
 
             <div className="filter__range__colors-ops">
@@ -135,9 +139,11 @@ const Filter = ({ className }) => {
                 ></div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="filter__range__size">
+          <SizeFilter />
+
+          {/* <div className="filter__range__size">
             <h3 className="filter__range__size-text">Size</h3>
 
             <div className="filter__range__size-ops">
@@ -202,7 +208,7 @@ const Filter = ({ className }) => {
                 XXL
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="filter__range__pr-range">
             <h3 className="filter__range__pr-range-text">Price Range</h3>
@@ -282,7 +288,8 @@ const Filter = ({ className }) => {
         </div>
 
         <div className="filter__apply">
-          <button className="btn-md btn-primary"> Apply </button>
+          {/* <button className="btn-md btn-primary"> Apply </button> */}
+          <Button primary>Apply</Button>
           <div>Clear All</div>
         </div>
       </div>

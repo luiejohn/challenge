@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import QuantityCounter from "../../quantityCounter/quantityCounter";
 
 import "./item.scss";
 
@@ -28,7 +29,15 @@ const Item = () => {
         <div>L</div>
         <div>X</div>
       </div>
-      <div className="cart__items__quantity">
+
+      <QuantityCounter
+        centered
+        increase={increase}
+        decrease={decrease}
+        quantity={quantity}
+      />
+
+      {/* <div className="cart__items__quantity">
         <div
           className="cart__items__quantity-control"
           onClick={() => decrease()}
@@ -44,7 +53,8 @@ const Item = () => {
           {" "}
           +{" "}
         </div>
-      </div>
+      </div> */}
+
       <div className="cart__items__price">$13.25</div>
     </div>
   );

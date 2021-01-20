@@ -1,0 +1,42 @@
+.filter__range {
+  &__colors {
+    margin: 2rem 0;
+
+    &-text {
+      // font-size: 1.8rem;
+      // font-weight: 700;
+      color: #b4b4b4;
+    }
+
+    &-ops {
+      //   margin-top: 0.7rem;
+      display: flex;
+      //   justify-content: space-between;
+      cursor: pointer;
+
+      &-outer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+        padding: 0.55rem;
+        width: 3rem;
+        height: 3rem;
+        border: 1px solid transparent;
+        border-radius: 50%;
+      }
+
+      &-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        // background-color: red;
+      }
+    }
+  }
+}
+
+.color-selected {
+  border: 1px solid #ccc;
+}

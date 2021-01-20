@@ -11,12 +11,68 @@
   // box-shadow: .3rem .3rem .8rem rgba(0,0,0, .15);
 
   &__image {
-    border: 1px solid red;
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+
+    &-preview {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    &-list {
+      height: 130px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+
+      & div {
+        display: flex;
+        flex-basis: content;
+      }
+
+      & div > * {
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+
+        width: 125px;
+      }
+    }
   }
 
   &__details {
     // justify-self: start;
-    border: 1px solid blue;
+    // border: 1px solid blue;
+    padding: 1.3rem;
+
+    &__stars {
+      margin-top: 2rem;
+    }
+
+    &__price {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #f62f5e;
+    }
+
+    &__btn {
+      display: flex;
+
+      margin-top: 55px;
+    }
+
+    &__btn > *:not(:last-child) {
+      margin-right: 15px;
+    }
   }
 }
 
@@ -25,4 +81,90 @@
   padding: 3rem 5rem;
   border: 1px solid #ccc;
   border-top: none;
+  margin-bottom: 35px;
+
+  &__review_cont {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    grid-template-rows: min-content;
+  }
+}
+
+.prodrev__review__comments {
+  &-react {
+    display: flex;
+    margin: 25px 0;
+
+    & > *:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  &-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #e6e6e6;
+    border-radius: 50%;
+    margin-right: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & svg {
+      width: 18px !important;
+      height: 18px !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.addrev {
+  &__form {
+    display: grid;
+    grid-template-columns: 25% 1fr;
+
+    & > * {
+      margin-bottom: 15px;
+    }
+
+    &_title {
+      font-weight: 700;
+    }
+
+    &_name {
+      width: 250px;
+      border: 1px solid #ccc;
+      padding: 7px;
+
+      border-radius: 5px;
+    }
+
+    &_review {
+      width: 100%;
+      border: 1px solid #ccc;
+      padding: 12px;
+
+      border-radius: 5px;
+      overflow: auto;
+      outline: none;
+
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+
+      resize: none;
+    }
+  }
+}
+
+.itemsuggest {
+  text-align: left;
 }
