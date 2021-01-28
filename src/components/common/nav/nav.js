@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Modal from "../Modal/modal";
 
 import "./nav.scss";
 
@@ -10,7 +11,7 @@ import Cart from "./../cart/cart";
 
 const Navigation = (props) => {
   const [isCart, setCart] = useState(false);
-  console.log(props);
+  const [isSignInModal, setSignInModal] = useState(false);
 
   return (
     <Fragment>
@@ -18,7 +19,14 @@ const Navigation = (props) => {
         <div className="container-center">
           <div className="navigation__cart">
             <div className="navigation__cart__greet">
-              Hi! <span>Sign in</span> or <span>Register</span>
+              Hi!{" "}
+              <span onClick={() => setSignInModal(!isSignInModal)}>
+                Sign in
+              </span>{" "}
+              or{" "}
+              <span onClick={() => setSignInModal(!isSignInModal)}>
+                Register
+              </span>
             </div>
 
             <div className="navigation__cart__deals">
@@ -127,6 +135,10 @@ const Navigation = (props) => {
           </div>
         </div>
       </div>
+
+      <Modal show={isSignInModal} handleChange={setSignInModal}>
+        Example
+      </Modal>
     </Fragment>
   );
 };
