@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -8,10 +8,22 @@ import "./nav.scss";
 
 import svg from "../../../assets/Icon/sprite.svg";
 import Cart from "./../cart/cart";
+import Button from "../button/button";
+import { signInWithGoogle, auth } from "../../../firebase/firebase.utils";
 
-const Navigation = (props) => {
+const Navigation = ({
+  currentUser,
+  currentCategory,
+  setCurrentCategory,
+  match,
+}) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
+  console.log(currentUser.current ? true : false);
+
+  useEffect(() => {
+    setSignInModal(currentUser.current ? false : true);
+  }, [currentUser.current]);
 
   return (
     <Fragment>
@@ -20,13 +32,30 @@ const Navigation = (props) => {
           <div className="navigation__cart">
             <div className="navigation__cart__greet">
               Hi!{" "}
-              <span onClick={() => setSignInModal(!isSignInModal)}>
-                Sign in
-              </span>{" "}
-              or{" "}
-              <span onClick={() => setSignInModal(!isSignInModal)}>
-                Register
-              </span>
+              {currentUser.current ? (
+                <span>
+                  <span className="navigation__cart__greet-name">
+                    {currentUser.current.displayName}
+                  </span>
+                  &nbsp;
+                  <span
+                    className="navigation__cart__greet-signOut"
+                    onClick={() => auth.signOut()}
+                  >
+                    Sign Out?
+                  </span>
+                </span>
+              ) : (
+                <span className="navigation__cart__greet-highlight">
+                  <span onClick={() => setSignInModal(!isSignInModal)}>
+                    Sign in
+                  </span>{" "}
+                  or{" "}
+                  <span onClick={() => setSignInModal(!isSignInModal)}>
+                    Register
+                  </span>
+                </span>
+              )}
             </div>
 
             <div className="navigation__cart__deals">
@@ -63,35 +92,34 @@ const Navigation = (props) => {
 
               <nav className="navigation__nav__navlist">
                 <Link
-                  to={"/category/" + props.currentCategory}
-                  onClick={() => props.setCurrentCategory("Women")}
+                  to={"/category/" + currentCategory}
+                  onClick={() => setCurrentCategory("Women")}
                 >
                   Women
                 </Link>
                 <Link
-                  to={"/category/" + props.currentCategory}
-                  onClick={() => props.setCurrentCategory("Men")}
+                  to={"/category/" + currentCategory}
+                  onClick={() => setCurrentCategory("Men")}
                 >
                   Men
                 </Link>
                 <Link
-                  to={"/category/" + props.currentCategory}
-                  onClick={() => props.setCurrentCategory("Kids")}
+                  to={"/category/" + currentCategory}
+                  onClick={() => setCurrentCategory("Kids")}
                 >
                   Kids
                 </Link>
                 <Link
-                  to={"/category/" + props.currentCategory}
-                  onClick={() => props.setCurrentCategory("Shoes")}
+                  to={"/category/" + currentCategory}
+                  onClick={() => setCurrentCategory("Shoes")}
                 >
                   Shoes
                 </Link>
                 <Link
                   to={{
-                    pathname:
-                      props.match.url + "/category/" + props.currentCategory,
+                    pathname: match.url + "/category/" + currentCategory,
                   }}
-                  onClick={() => props.setCurrentCategory("Brands")}
+                  onClick={() => setCurrentCategory("Brands")}
                 >
                   Brands
                 </Link>
@@ -137,7 +165,56 @@ const Navigation = (props) => {
       </div>
 
       <Modal show={isSignInModal} handleChange={setSignInModal}>
-        Example
+        <div className="modal-content">
+          <button
+            onClick={() => setSignInModal(!isSignInModal)}
+            className="btn-close"
+          >
+            &times;
+          </button>
+
+          <span className="login-with">Sign in with</span>
+          <div className="social-cont">
+            <button className="btn-media" onClick={signInWithGoogle}>
+              <svg className="google-icon">
+                <use xlinkHref={`${svg}#icon-google2`}></use>
+              </svg>
+              <span>Google</span>
+            </button>
+            {/* <button className="btn-media">
+              <svg className="fb-icon">
+                <use xlinkHref={`${svg}#icon-facebook2`}></use>
+              </svg>
+              <span>Facebook</span>
+            </button> */}
+          </div>
+
+          <div className="login-cont">
+            <span className="login-with">or sign in with credentials</span>
+
+            <input type="text" placeholder="Email" className="login__input" />
+            <input
+              type="Password"
+              placeholder="Password"
+              className="login__input"
+            />
+            <div className="remember-me">
+              <input type="checkbox" id="check1" />{" "}
+              <label htmlFor="check1">Remember Me</label>
+            </div>
+
+            <div className="login-btn-cont">
+              <Button primary>
+                {/* <Link
+                onClick={() => this.handleChange("loggingIn", true)}
+                to="/admin"
+              > */}
+                LOGIN
+                {/* </Link> */}
+              </Button>
+            </div>
+          </div>
+        </div>
       </Modal>
     </Fragment>
   );

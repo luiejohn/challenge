@@ -18,7 +18,15 @@
       font-weight: 700;
     }
 
-    &__greet span {
+    &__greet-name {
+      color: #f5265e !important;
+    }
+
+    &__greet-signOut {
+      cursor: pointer;
+    }
+
+    &__greet-highlight {
       color: #f5265e;
       cursor: pointer;
     }
