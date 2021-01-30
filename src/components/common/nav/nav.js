@@ -19,11 +19,10 @@ const Navigation = ({
 }) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
-  console.log(currentUser.current ? true : false);
 
   useEffect(() => {
-    setSignInModal(currentUser.current ? false : true);
-  }, [currentUser.current]);
+    setSignInModal(currentUser ? false : true);
+  }, [currentUser]);
 
   return (
     <Fragment>
@@ -32,7 +31,7 @@ const Navigation = ({
           <div className="navigation__cart">
             <div className="navigation__cart__greet">
               Hi!{" "}
-              {currentUser.current ? (
+              {currentUser ? (
                 <span>
                   <span className="navigation__cart__greet-name">
                     {currentUser.current.displayName}

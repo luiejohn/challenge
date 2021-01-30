@@ -9,19 +9,32 @@ import CategoryPage from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
 import ItemPage from "./../Pages/Item/ItemPage";
 
-import { auth } from "../../firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
 const Layout = () => {
   const [currentUser, setCurrentUser] = useState({ current: "" });
 
   useEffect(() => {
-    const unSubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser({ current: user });
+    const unSubscribe = auth.onAuthStateChanged(async (userAuth) => {
+      //Check if user already exist using Google OAuth
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-      console.log(user);
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            current: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
+      } else {
+        setCurrentUser(userAuth);
+      }
     });
 
     return () => {
+      //Clean up
       unSubscribe();
     };
   }, []);
