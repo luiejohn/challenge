@@ -3,13 +3,14 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Modal from "../Modal/modal";
+import SignUpModal from "../signUpModal/signUp";
+import SignInModal from "../signInModal/signInModal";
 
 import "./nav.scss";
 
 import svg from "../../../assets/Icon/sprite.svg";
 import Cart from "./../cart/cart";
-import Button from "../button/button";
-import { signInWithGoogle, auth } from "../../../firebase/firebase.utils";
+import { auth } from "../../../firebase/firebase.utils";
 
 const Navigation = ({
   currentUser,
@@ -19,10 +20,27 @@ const Navigation = ({
 }) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
-
+  const [isSignUpModal, setSignUpModal] = useState(false);
+  console.log(isSignInModal);
+  console.log(isSignUpModal);
   useEffect(() => {
     setSignInModal(currentUser ? false : true);
   }, [currentUser]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", closeModal, false);
+
+    return () => {
+      window.removeEventListener("keydown", closeModal, false);
+    };
+  }, []);
+
+  const closeModal = (event) => {
+    if (event.keyCode === 27) {
+      setSignInModal(false);
+      setSignUpModal(false);
+    }
+  };
 
   return (
     <Fragment>
@@ -50,7 +68,7 @@ const Navigation = ({
                     Sign in
                   </span>{" "}
                   or{" "}
-                  <span onClick={() => setSignInModal(!isSignInModal)}>
+                  <span onClick={() => setSignUpModal(!isSignUpModal)}>
                     Register
                   </span>
                 </span>
@@ -163,7 +181,7 @@ const Navigation = ({
         </div>
       </div>
 
-      <Modal show={isSignInModal} handleChange={setSignInModal}>
+      {/* <Modal show={isSignInModal} handleChange={setSignInModal}>
         <div className="modal-content">
           <button
             onClick={() => setSignInModal(!isSignInModal)}
@@ -180,41 +198,40 @@ const Navigation = ({
               </svg>
               <span>Google</span>
             </button>
-            {/* <button className="btn-media">
-              <svg className="fb-icon">
-                <use xlinkHref={`${svg}#icon-facebook2`}></use>
-              </svg>
-              <span>Facebook</span>
-            </button> */}
           </div>
 
           <div className="login-cont">
             <span className="login-with">or sign in with credentials</span>
-
-            <input type="text" placeholder="Email" className="login__input" />
-            <input
-              type="Password"
-              placeholder="Password"
-              className="login__input"
-            />
+            <form onSubmit={handleFormSubmit}>
+              <input
+                name="email"
+                type="text"
+                placeholder="Email"
+                className="login__input"
+                onChange={handleChange}
+              />
+              <input
+                name="password"
+                type="Password"
+                placeholder="Password"
+                className="login__input"
+                onChange={handleChange}
+              />
+            </form>
             <div className="remember-me">
               <input type="checkbox" id="check1" />{" "}
               <label htmlFor="check1">Remember Me</label>
             </div>
 
             <div className="login-btn-cont">
-              <Button primary>
-                {/* <Link
-                onClick={() => this.handleChange("loggingIn", true)}
-                to="/admin"
-              > */}
-                LOGIN
-                {/* </Link> */}
-              </Button>
+              <Button primary>SIGNIN</Button>
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
+
+      <SignInModal show={isSignInModal} handleChange={setSignInModal} />
+      <SignUpModal show={isSignUpModal} handleChange={setSignUpModal} />
     </Fragment>
   );
 };
