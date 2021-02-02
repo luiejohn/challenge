@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Layout.scss";
 
@@ -10,10 +11,9 @@ import Home from "../Pages/Home/Home";
 import ItemPage from "./../Pages/Item/ItemPage";
 
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { setCurrentUser } from "../../store/user/user.actions";
 
-const Layout = () => {
-  const [currentUser, setCurrentUser] = useState({ current: "" });
-
+const Layout = ({ setUser }) => {
   useEffect(() => {
     const unSubscribe = auth.onAuthStateChanged(async (userAuth) => {
       //Check if user already exist using Google OAuth
@@ -21,15 +21,13 @@ const Layout = () => {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            current: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
+          setUser({
+            id: snapShot.id,
+            ...snapShot.data(),
           });
         });
       } else {
-        setCurrentUser(userAuth);
+        setUser(userAuth);
       }
     });
 
@@ -41,7 +39,7 @@ const Layout = () => {
 
   return (
     <Fragment>
-      <Navigation currentUser={currentUser} />
+      <Navigation />
 
       <div className="content">
         <Switch>
@@ -60,4 +58,8 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+const mapDispatchToProps = (dispatch) => ({
+  setUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(null, mapDispatchToProps)(Layout);

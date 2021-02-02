@@ -19,6 +19,7 @@
     "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.4",
     "redux-form": "^8.2.3",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "serve": "^11.3.2",
     "typeface-montserrat": "0.0.75",

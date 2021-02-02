@@ -21,8 +21,7 @@ const Navigation = ({
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
   const [isSignUpModal, setSignUpModal] = useState(false);
-  console.log(isSignInModal);
-  console.log(isSignUpModal);
+
   useEffect(() => {
     setSignInModal(currentUser ? false : true);
   }, [currentUser]);
@@ -52,7 +51,7 @@ const Navigation = ({
               {currentUser ? (
                 <span>
                   <span className="navigation__cart__greet-name">
-                    {currentUser.current.displayName}
+                    {currentUser.displayName}
                   </span>
                   &nbsp;
                   <span
@@ -181,74 +180,14 @@ const Navigation = ({
         </div>
       </div>
 
-      {/* <Modal show={isSignInModal} handleChange={setSignInModal}>
-        <div className="modal-content">
-          <button
-            onClick={() => setSignInModal(!isSignInModal)}
-            className="btn-close"
-          >
-            &times;
-          </button>
-
-          <span className="login-with">Sign in with</span>
-          <div className="social-cont">
-            <button className="btn-media" onClick={signInWithGoogle}>
-              <svg className="google-icon">
-                <use xlinkHref={`${svg}#icon-google2`}></use>
-              </svg>
-              <span>Google</span>
-            </button>
-          </div>
-
-          <div className="login-cont">
-            <span className="login-with">or sign in with credentials</span>
-            <form onSubmit={handleFormSubmit}>
-              <input
-                name="email"
-                type="text"
-                placeholder="Email"
-                className="login__input"
-                onChange={handleChange}
-              />
-              <input
-                name="password"
-                type="Password"
-                placeholder="Password"
-                className="login__input"
-                onChange={handleChange}
-              />
-            </form>
-            <div className="remember-me">
-              <input type="checkbox" id="check1" />{" "}
-              <label htmlFor="check1">Remember Me</label>
-            </div>
-
-            <div className="login-btn-cont">
-              <Button primary>SIGNIN</Button>
-            </div>
-          </div>
-        </div>
-      </Modal> */}
-
       <SignInModal show={isSignInModal} handleChange={setSignInModal} />
       <SignUpModal show={isSignUpModal} handleChange={setSignUpModal} />
     </Fragment>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setCurrentCategory: (newCat) => dispatch({ type: "SET_CATEGORY", newCat }),
-  };
-};
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
 
-const mapStateToProps = (state) => {
-  return {
-    currentCategory: state.currentCategory,
-  };
-};
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(Navigation);
+export default compose(withRouter, connect(mapStateToProps, null))(Navigation);
