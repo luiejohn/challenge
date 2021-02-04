@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 
 import "./Filter.scss";
-import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import Checkbox from "rc-checkbox";
 import "rc-checkbox/assets/index.css";
@@ -10,11 +9,16 @@ import svg from "../../../assets/Icon/sprite.svg";
 import SizeFilter from "../SizeFilter/sizeFilter";
 import ColorSelector from "../colorSelector/colorSelector";
 import Button from "../button/button";
+import { Range, getTrackBackground } from "react-range";
+
+const STEP = 0.1;
+const MIN = 0;
+const MAX = 100;
 
 const Filter = ({ className, currentCat }) => {
   const [selectedSize, setSelectedSize] = useState("XS");
   let [color, setColor] = useState(1);
-  let [value, setRange] = useState({ min: 1, max: 18 });
+  const [values, setValues] = React.useState([0, 100]);
 
   return (
     <Fragment>
@@ -44,186 +48,104 @@ const Filter = ({ className, currentCat }) => {
 
         <div className="filter__range">
           <ColorSelector color={color} setColor={setColor} />
-          {/* <div className="filter__range__colors">
-            <h3 className="filter__range__colors-text">Color</h3>
-
-            <div className="filter__range__colors-ops">
-              <div
-                className={
-                  color === 1
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(1)}
-              >
-                <div
-                  style={{ backgroundColor: "#6eb2fb" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 2
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(2)}
-              >
-                <div
-                  style={{ backgroundColor: "#00d3ca" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 3
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(3)}
-              >
-                <div
-                  style={{ backgroundColor: "#f62f5e" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 4
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(4)}
-              >
-                <div
-                  style={{ backgroundColor: "#f1ad3d" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 5
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(5)}
-              >
-                <div
-                  style={{ backgroundColor: "#effc90" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 6
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(6)}
-              >
-                <div
-                  style={{ backgroundColor: "green" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-              <div
-                className={
-                  color === 7
-                    ? "filter__range__colors-ops-outer color-selected"
-                    : "filter__range__colors-ops-outer"
-                }
-                onClick={() => setColor(7)}
-              >
-                <div
-                  style={{ backgroundColor: "purple" }}
-                  className="filter__range__colors-ops-inner"
-                ></div>
-              </div>
-            </div>
-          </div> */}
 
           <SizeFilter
             selectedSize={selectedSize}
             setSelectedSize={setSelectedSize}
           />
 
-          {/* <div className="filter__range__size">
-            <h3 className="filter__range__size-text">Size</h3>
-
-            <div className="filter__range__size-ops">
-              <div
-                onClick={() => setSize("XS")}
-                className={
-                  size === "XS"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                XS
-              </div>
-              <div
-                onClick={() => setSize("S")}
-                className={
-                  size === "S"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                S
-              </div>
-              <div
-                onClick={() => setSize("M")}
-                className={
-                  size === "M"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                M
-              </div>
-              <div
-                onClick={() => setSize("L")}
-                className={
-                  size === "L"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                L
-              </div>
-              <div
-                onClick={() => setSize("XL")}
-                className={
-                  size === "XL"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                XL
-              </div>
-              <div
-                onClick={() => setSize("XXL")}
-                className={
-                  size === "XXL"
-                    ? "filter__range__size-ops size-selected"
-                    : "filter__range__size-ops"
-                }
-              >
-                XXL
-              </div>
-            </div>
-          </div> */}
-
           <div className="filter__range__pr-range">
             <h3 className="filter__range__pr-range-text">Price Range</h3>
 
             <div className="filter__range__pr-range-ops">
-              <InputRange
-                maxValue={20}
-                minValue={0}
-                value={value}
-                onChange={(value) => setRange({ value })}
-              />
+              <div
+                style={{
+                  margin: "30px 17px 0 17px",
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <Range
+                  values={values}
+                  step={STEP}
+                  min={MIN}
+                  max={MAX}
+                  rtl={false}
+                  onChange={(values) => setValues(values)}
+                  renderTrack={({ props, children }) => (
+                    <div
+                      onMouseDown={props.onMouseDown}
+                      onTouchStart={props.onTouchStart}
+                      style={{
+                        ...props.style,
+                        height: "36px",
+                        display: "flex",
+                        width: "100%",
+                      }}
+                    >
+                      <div
+                        ref={props.ref}
+                        style={{
+                          height: "5px",
+                          width: "100%",
+                          borderRadius: "4px",
+                          background: getTrackBackground({
+                            values,
+                            colors: ["#ccc", "#548BF4", "#ccc"],
+                            min: MIN,
+                            max: MAX,
+                            rtl: false,
+                          }),
+                          alignSelf: "center",
+                        }}
+                      >
+                        {children}
+                      </div>
+                    </div>
+                  )}
+                  renderThumb={({ index, props, isDragged }) => (
+                    <div
+                      {...props}
+                      style={{
+                        ...props.style,
+                        // height: "20px",
+                        // width: "20px",
+                        // borderRadius: "4px",
+                        // backgroundColor: "#FFF",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // boxShadow: "0px 2px 6px #AAA",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "-28px",
+                          color: "#fff",
+                          fontWeight: "bold",
+                          fontSize: "14px",
+                          fontFamily:
+                            "Arial,Helvetica Neue,Helvetica,sans-serif",
+                          padding: "4px",
+                          borderRadius: "4px",
+                          backgroundColor: "#f62f5e",
+                        }}
+                      >
+                        ${values[index].toFixed(1)}
+                      </div>
+                      <div
+                        style={{
+                          height: "18px",
+                          width: "5px",
+                          backgroundColor: isDragged ? "#548BF4" : "#f62f5e",
+                        }}
+                      />
+                    </div>
+                  )}
+                />
+              </div>
             </div>
           </div>
 

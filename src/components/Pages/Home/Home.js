@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
+import { setCurrentCategory } from "../../../store/category/category.actions";
 import "./Home.scss";
 
-const Home = () => {
+const Home = ({ setCurrentCategory }) => {
+  useEffect(() => {
+    setCurrentCategory(null);
+  }, []);
+
   return (
     <div>
       <div className="home-header"></div>
@@ -30,4 +36,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentCategory: (cat) => dispatch(setCurrentCategory(cat)),
+});
+
+export default connect(null, mapDispatchToProps)(Home);

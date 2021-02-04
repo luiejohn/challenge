@@ -12,6 +12,7 @@ import svg from "../../../assets/Icon/sprite.svg";
 import {
   addCartItem,
   setTotalItemCount,
+  setTotalPrice,
 } from "../../../store/cart/cart.actions";
 
 import { Carousel } from "react-responsive-carousel";
@@ -47,9 +48,16 @@ const ItemPage = (props) => {
       priceEach: itemToAdd[0].price,
       priceTotal: itemToAdd[0].price * quantity,
     };
+    const updatedItemList = [...props.cartItems, addItem];
 
-    props.setItemCount([...props.cartItems, addItem].length);
-    props.addToCart([...props.cartItems, addItem]);
+    const totalPrice = updatedItemList.reduce(
+      (accumulatedValue, item) => accumulatedValue + item.priceTotal,
+      0
+    );
+
+    props.setTotalPrice(totalPrice);
+    props.setItemCount(updatedItemList.length);
+    props.addToCart(updatedItemList);
   };
 
   useEffect(() => {
@@ -287,6 +295,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addToCart: (item) => dispatch(addCartItem(item)),
   setItemCount: (number) => dispatch(setTotalItemCount(number)),
+  setTotalPrice: (number) => dispatch(setTotalPrice(number)),
 });
 
 export default compose(

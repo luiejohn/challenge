@@ -5,6 +5,11 @@ export const setTotalItemCount = (number) => ({
   payload: number,
 });
 
+export const setTotalPrice = (number) => ({
+  type: cartActionTypes.SET_TOTAL_PRICE,
+  payload: number,
+});
+
 export const addCartItem = (items) => ({
   type: cartActionTypes.ADD_CART_ITEM,
   payload: items,

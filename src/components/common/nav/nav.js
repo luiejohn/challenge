@@ -20,6 +20,7 @@ const Navigation = ({
   // setCategory,
   // match,
   cartTotalItems,
+  cartTotalPrice,
 }) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
@@ -99,7 +100,7 @@ const Navigation = ({
                   </span>
                 </div>
 
-                <div>Your Bag: $6.99</div>
+                <div>Your Bag: ${cartTotalPrice}</div>
               </div>
             </div>
           </div>
@@ -213,6 +214,7 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.currentUser,
   currentCategory: state.category.currentCategory,
   cartTotalItems: state.cart.totalItemCount,
+  cartTotalPrice: state.cart.totalCartPrice,
   cartItemList: state.cart.items,
 });
 

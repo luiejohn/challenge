@@ -5,6 +5,7 @@ import {
   removeCartItem,
   setTotalItemCount,
   updateCartItem,
+  setTotalPrice,
 } from "../../../../store/cart/cart.actions";
 
 import "./item.scss";
@@ -16,32 +17,36 @@ const Item = ({
   removeItem,
   setItemCount,
   cartItemCount,
+  setTotPrice,
 }) => {
-  console.log(cartItemCount);
   const increase = () => {
+    let totalPrice = 0;
     const updatedItemList = itemList.map((item) => {
       if (item.id === itemDetails.id) {
         item.quantity = itemDetails.quantity + 1;
         item.priceTotal = itemDetails.priceTotal + itemDetails.priceEach;
       }
+      totalPrice = totalPrice + item.priceTotal;
       return item;
     });
 
-    console.log(updatedItemList);
+    setTotPrice(totalPrice);
     updateItem(updatedItemList);
   };
 
   const decrease = () => {
+    let totalPrice = 0;
     if (itemDetails.quantity > 1) {
       const updatedItemList = itemList.map((item) => {
         if (item.id === itemDetails.id) {
           item.quantity = itemDetails.quantity - 1;
           item.priceTotal = itemDetails.priceTotal - itemDetails.priceEach;
         }
+        totalPrice = item.priceTotal - totalPrice;
         return item;
       });
 
-      console.log(updatedItemList);
+      setTotPrice(totalPrice);
       updateItem(updatedItemList);
     }
   };
@@ -60,7 +65,7 @@ const Item = ({
         <div className="cart__items__item-title">{itemDetails.title}</div>
         <div className="cart__items__item-id">{itemDetails.id}</div>
         <div className="cart__items__item-remove" onClick={removeItemFromCart}>
-          xremove
+          Remove from cart
         </div>
       </div>
 
@@ -84,6 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateItem: (items) => dispatch(updateCartItem(items)),
   removeItem: (items) => dispatch(removeCartItem(items)),
   setItemCount: (number) => dispatch(setTotalItemCount(number)),
+  setTotPrice: (number) => dispatch(setTotalPrice(number)),
 });
 
 const mapStateToProps = (state) => ({

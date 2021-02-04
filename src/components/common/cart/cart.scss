@@ -46,6 +46,23 @@
     }
   }
 
+  &__tableCont {
+    height: 300px;
+  }
+
+  &__tableContScroll {
+    height: 300px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      background-color: #ccc;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #6c6c6c;
+    }
+  }
+
   &__list {
     padding: 2rem 0;
   }
