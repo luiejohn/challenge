@@ -29,6 +29,7 @@ class SignInModal extends React.Component {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
+      this.props.handleChange(false);
     } catch (error) {
       console.log(error);
     }

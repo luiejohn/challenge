@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 
 import "./Filter.scss";
 import InputRange from "react-input-range";
@@ -10,8 +11,8 @@ import SizeFilter from "../SizeFilter/sizeFilter";
 import ColorSelector from "../colorSelector/colorSelector";
 import Button from "../button/button";
 
-const Filter = ({ className }) => {
-  let [size, setSize] = useState("");
+const Filter = ({ className, currentCat }) => {
+  const [selectedSize, setSelectedSize] = useState("XS");
   let [color, setColor] = useState(1);
   let [value, setRange] = useState({ min: 1, max: 18 });
 
@@ -26,8 +27,8 @@ const Filter = ({ className }) => {
               <use xlinkHref={`${svg}#icon-cross`} />
             </svg>
             <div>
-              <span>Gender: </span>
-              Woman
+              <span>Category: </span>
+              {currentCat}
             </div>
           </div>
           <div className="filter__header-cat">
@@ -35,7 +36,7 @@ const Filter = ({ className }) => {
               <use xlinkHref={`${svg}#icon-cross`} />
             </svg>
             <div>
-              <span>Category:</span>
+              <span>Sub Category:</span>
               Dresses
             </div>
           </div>
@@ -141,7 +142,10 @@ const Filter = ({ className }) => {
             </div>
           </div> */}
 
-          <SizeFilter />
+          <SizeFilter
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+          />
 
           {/* <div className="filter__range__size">
             <h3 className="filter__range__size-text">Size</h3>
@@ -297,4 +301,8 @@ const Filter = ({ className }) => {
   );
 };
 
-export default Filter;
+const mapStateToProps = (state) => ({
+  currentCat: state.category.currentCategory,
+});
+
+export default connect(mapStateToProps)(Filter);

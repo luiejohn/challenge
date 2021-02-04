@@ -1,10 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "./sizeFilter.scss";
 
-const SizeFilter = () => {
-  let [size, setSize] = useState("");
-  let [color, setColor] = useState(1);
-
+const SizeFilter = ({ selectedSize, setSelectedSize }) => {
   return (
     <Fragment>
       <div className="filter__range__size">
@@ -12,9 +9,9 @@ const SizeFilter = () => {
 
         <div className="filter__range__size-ops">
           <div
-            onClick={() => setSize("XS")}
+            onClick={() => setSelectedSize("XS")}
             className={
-              size === "XS"
+              selectedSize === "XS"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }
@@ -22,9 +19,9 @@ const SizeFilter = () => {
             XS
           </div>
           <div
-            onClick={() => setSize("S")}
+            onClick={() => setSelectedSize("S")}
             className={
-              size === "S"
+              selectedSize === "S"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }
@@ -32,9 +29,9 @@ const SizeFilter = () => {
             S
           </div>
           <div
-            onClick={() => setSize("M")}
+            onClick={() => setSelectedSize("M")}
             className={
-              size === "M"
+              selectedSize === "M"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }
@@ -42,9 +39,9 @@ const SizeFilter = () => {
             M
           </div>
           <div
-            onClick={() => setSize("L")}
+            onClick={() => setSelectedSize("L")}
             className={
-              size === "L"
+              selectedSize === "L"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }
@@ -52,9 +49,9 @@ const SizeFilter = () => {
             L
           </div>
           <div
-            onClick={() => setSize("XL")}
+            onClick={() => setSelectedSize("XL")}
             className={
-              size === "XL"
+              selectedSize === "XL"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }
@@ -62,9 +59,9 @@ const SizeFilter = () => {
             XL
           </div>
           <div
-            onClick={() => setSize("XXL")}
+            onClick={() => setSelectedSize("XXL")}
             className={
-              size === "XXL"
+              selectedSize === "XXL"
                 ? "filter__range__size-ops size-selected"
                 : "filter__range__size-ops"
             }

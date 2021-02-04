@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import Modal from "../Modal/modal";
@@ -12,18 +12,22 @@ import svg from "../../../assets/Icon/sprite.svg";
 import Cart from "./../cart/cart";
 import { auth } from "../../../firebase/firebase.utils";
 
+import { setCurrentCategory } from "../../../store/category/category.actions";
+
 const Navigation = ({
   currentUser,
   currentCategory,
-  setCurrentCategory,
-  match,
+  // setCategory,
+  // match,
+  cartTotalItems,
 }) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
   const [isSignUpModal, setSignUpModal] = useState(false);
 
+  console.log(cartTotalItems);
   useEffect(() => {
-    setSignInModal(currentUser ? false : true);
+    // setSignInModal(currentUser ? false : true);
   }, [currentUser]);
 
   useEffect(() => {
@@ -90,7 +94,9 @@ const Navigation = ({
                   <svg className="navigation__cart__bag-icon">
                     <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
                   </svg>
-                  <span className="navigation__cart__bag-count">6</span>
+                  <span className="navigation__cart__bag-count">
+                    {cartTotalItems}
+                  </span>
                 </div>
 
                 <div>Your Bag: $6.99</div>
@@ -107,38 +113,51 @@ const Navigation = ({
               </div>
 
               <nav className="navigation__nav__navlist">
-                <Link
-                  to={"/category/" + currentCategory}
-                  onClick={() => setCurrentCategory("Women")}
+                <NavLink
+                  to={"/category/Women"}
+                  activeClassName={
+                    currentCategory ? "navigation__nav__navlist_active" : null
+                  }
+                  // onClick={() => setCategory("Women")}
                 >
                   Women
-                </Link>
-                <Link
-                  to={"/category/" + currentCategory}
-                  onClick={() => setCurrentCategory("Men")}
+                </NavLink>
+                <NavLink
+                  to={{ pathname: "/category/Men", state: { category: "Men" } }}
+                  activeClassName={
+                    currentCategory ? "navigation__nav__navlist_active" : null
+                  }
+                  // onClick={() => setCategory("Men")}
                 >
                   Men
-                </Link>
-                <Link
-                  to={"/category/" + currentCategory}
-                  onClick={() => setCurrentCategory("Kids")}
+                </NavLink>
+                <NavLink
+                  to={"/category/" + "Kids"}
+                  activeClassName={
+                    currentCategory ? "navigation__nav__navlist_active" : null
+                  }
+                  // onClick={() => setCategory("Kids")}
                 >
                   Kids
-                </Link>
-                <Link
-                  to={"/category/" + currentCategory}
-                  onClick={() => setCurrentCategory("Shoes")}
+                </NavLink>
+                <NavLink
+                  to={"/category/" + "Shoes"}
+                  activeClassName={
+                    currentCategory ? "navigation__nav__navlist_active" : null
+                  }
+                  // onClick={() => setCategory("Shoes")}
                 >
                   Shoes
-                </Link>
-                <Link
-                  to={{
-                    pathname: match.url + "/category/" + currentCategory,
-                  }}
-                  onClick={() => setCurrentCategory("Brands")}
+                </NavLink>
+                <NavLink
+                  to={"/category/" + "Brands"}
+                  activeClassName={
+                    currentCategory ? "navigation__nav__navlist_active" : null
+                  }
+                  // onClick={() => setCategory("Brands")}
                 >
                   Brands
-                </Link>
+                </NavLink>
               </nav>
 
               <div className="navigation__nav__search">
@@ -186,8 +205,18 @@ const Navigation = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapDispatchToProps = (dispatch) => ({
+  setCategory: (cat) => dispatch(setCurrentCategory(cat)),
 });
 
-export default compose(withRouter, connect(mapStateToProps, null))(Navigation);
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+  currentCategory: state.category.currentCategory,
+  cartTotalItems: state.cart.totalItemCount,
+  cartItemList: state.cart.items,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Navigation);

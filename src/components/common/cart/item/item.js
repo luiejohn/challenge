@@ -1,63 +1,93 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import QuantityCounter from "../../quantityCounter/quantityCounter";
+import {
+  removeCartItem,
+  setTotalItemCount,
+  updateCartItem,
+} from "../../../../store/cart/cart.actions";
 
 import "./item.scss";
 
-const Item = () => {
-  let [quantity, setQuantity] = useState(1);
-
+const Item = ({
+  itemList,
+  itemDetails,
+  updateItem,
+  removeItem,
+  setItemCount,
+  cartItemCount,
+}) => {
+  console.log(cartItemCount);
   const increase = () => {
-    setQuantity(quantity + 1);
+    const updatedItemList = itemList.map((item) => {
+      if (item.id === itemDetails.id) {
+        item.quantity = itemDetails.quantity + 1;
+        item.priceTotal = itemDetails.priceTotal + itemDetails.priceEach;
+      }
+      return item;
+    });
+
+    console.log(updatedItemList);
+    updateItem(updatedItemList);
   };
 
   const decrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+    if (itemDetails.quantity > 1) {
+      const updatedItemList = itemList.map((item) => {
+        if (item.id === itemDetails.id) {
+          item.quantity = itemDetails.quantity - 1;
+          item.priceTotal = itemDetails.priceTotal - itemDetails.priceEach;
+        }
+        return item;
+      });
+
+      console.log(updatedItemList);
+      updateItem(updatedItemList);
     }
+  };
+
+  const removeItemFromCart = () => {
+    const newItemList = itemList.filter((item) => item.id !== itemDetails.id);
+
+    setItemCount(newItemList.length);
+    removeItem(newItemList);
   };
 
   return (
     <div className="cart__items">
       <div className="cart__items__item">
         <div className="cart__items__item-image">image</div>
-        <div className="cart__items__item-title">Green T-shirt for Men</div>
-        <div className="cart__items__item-id">Men BK3569</div>
-        <div className="cart__items__item-remove">xremove</div>
+        <div className="cart__items__item-title">{itemDetails.title}</div>
+        <div className="cart__items__item-id">{itemDetails.id}</div>
+        <div className="cart__items__item-remove" onClick={removeItemFromCart}>
+          xremove
+        </div>
       </div>
 
       <div className="cart__items__size">
-        <div>L</div>
-        <div>X</div>
+        <div>{itemDetails.size}</div>
+        {/* <div>X</div> */}
       </div>
 
       <QuantityCounter
         centered
         increase={increase}
         decrease={decrease}
-        quantity={quantity}
+        quantity={itemDetails.quantity}
       />
-
-      {/* <div className="cart__items__quantity">
-        <div
-          className="cart__items__quantity-control"
-          onClick={() => decrease()}
-        >
-          {" "}
-          -{" "}
-        </div>
-        <div className="cart__items__quantity-content"> {quantity} </div>
-        <div
-          className="cart__items__quantity-control"
-          onClick={() => increase()}
-        >
-          {" "}
-          +{" "}
-        </div>
-      </div> */}
-
-      <div className="cart__items__price">$13.25</div>
+      <div className="cart__items__price">${itemDetails.priceTotal}</div>
     </div>
   );
 };
 
-export default Item;
+const mapDispatchToProps = (dispatch) => ({
+  updateItem: (items) => dispatch(updateCartItem(items)),
+  removeItem: (items) => dispatch(removeCartItem(items)),
+  setItemCount: (number) => dispatch(setTotalItemCount(number)),
+});
+
+const mapStateToProps = (state) => ({
+  cartItemCount: state.cart.totalItemCount,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

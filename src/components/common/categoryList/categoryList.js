@@ -1,28 +1,22 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { categories } from "./../../../store/dummy";
 import "./categoryList.scss";
 
+import { setCurrentCategory } from "../../../store/category/category.actions";
+
 const Category = (props) => {
-  // const [subCat, setSubCat] = useState([]);
-
-  // useEffect(() => {
-  //     setSubCat(categories.filter( category => {
-  //         return category.name === props.currentCategory
-  //         }
-  //     ))
-
-  //     // return () => {
-  //     //     cleanup
-  //     // };
+  console.log(props);
+  // useEffect(()=> {
+  //   setCurrentCategory
   // }, [])
 
   const matchCategory = () => {
     let newCategory = categories.filter((category) => {
       return category.name === props.currentCategory;
     });
-
+    console.log(newCategory);
     return newCategory;
   };
 
@@ -38,9 +32,13 @@ const Category = (props) => {
   return (
     <Fragment>
       <div className="category">
-        <h1 className="category__header">{props.currentCategory} Wear</h1>
+        <h1 className="category__header">
+          {props.currentCategory ? props.currentCategory : "Loading ..."}
+        </h1>
 
-        <div className="category__list">{renderCat()}</div>
+        <div className="category__list">
+          {props.currentCategory ? renderCat() : "Loading ..."}
+        </div>
 
         {/* <div> Accessories </div>
                     <div> ASOS Basic Tops </div>
@@ -65,10 +63,13 @@ const Category = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    currentCategory: state.currentCategory,
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  currentCategory: state.category.currentCategory,
+  props: ownProps,
+});
 
-export default connect(mapStateToProps)(Category);
+const mapDispatchToProps = (dispatch) => ({
+  setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

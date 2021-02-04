@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import "./ItemPage.scss";
 import SizeFilter from "../../common/SizeFilter/sizeFilter";
 import QuantityCounter from "../../common/quantityCounter/quantityCounter";
@@ -7,15 +9,22 @@ import ColorSelector from "../../common/colorSelector/colorSelector";
 import Button from "../../common/button/button";
 import svg from "../../../assets/Icon/sprite.svg";
 
+import {
+  addCartItem,
+  setTotalItemCount,
+} from "../../../store/cart/cart.actions";
+
 import { Carousel } from "react-responsive-carousel";
 import shirt1 from "../../../assets/images/images-shirt11.png";
 import shirt2 from "../../../assets/images/images-shirt12.png";
 import shirt3 from "../../../assets/images/images-shirt13.png";
+import { items } from "../../../store/dummy";
 
 const ItemPage = (props) => {
-  // console.log(props);
-  let [quantity, setQuantity] = useState(1);
-  let [color, setColor] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(1);
+
+  const [selectedSize, setSelectedSize] = useState("XS");
 
   const increase = () => {
     setQuantity(quantity + 1);
@@ -25,6 +34,22 @@ const ItemPage = (props) => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
+  };
+
+  const addItemToCart = () => {
+    const ItemId = props.match.params.id;
+    const itemToAdd = items.filter((item) => item.id == ItemId);
+    const addItem = {
+      id: itemToAdd[0].id,
+      title: itemToAdd[0].itemName,
+      size: selectedSize,
+      quantity: quantity,
+      priceEach: itemToAdd[0].price,
+      priceTotal: itemToAdd[0].price * quantity,
+    };
+
+    props.setItemCount([...props.cartItems, addItem].length);
+    props.addToCart([...props.cartItems, addItem]);
   };
 
   useEffect(() => {
@@ -91,7 +116,10 @@ const ItemPage = (props) => {
 
             <ColorSelector color={color} setColor={setColor} />
 
-            <SizeFilter />
+            <SizeFilter
+              selectedSize={selectedSize}
+              setSelectedSize={setSelectedSize}
+            />
             <div>
               <QuantityCounter
                 title
@@ -102,7 +130,9 @@ const ItemPage = (props) => {
             </div>
 
             <div className="item__details__btn">
-              <Button primary>Add to Cart</Button>
+              <Button primary click={addItemToCart}>
+                Add to Cart
+              </Button>
               <Button icon>Add to Wishlist</Button>
               {/* <button className="btn-md btn-primary">Add to Cart</button> */}
               {/* <button className="btn-md btn-secondary">Add to Wishlist</button> */}
@@ -250,4 +280,16 @@ const ItemPage = (props) => {
   );
 };
 
-export default withRouter(ItemPage);
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.items,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (item) => dispatch(addCartItem(item)),
+  setItemCount: (number) => dispatch(setTotalItemCount(number)),
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(ItemPage);

@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 
 import "./cart.scss";
 import Item from "./item/item";
 import svg from "../../../assets/Icon/sprite.svg";
 
-const Cart = ({ className, setCart }) => {
+const Cart = ({ className, setCart, cartItems }) => {
+  console.log(cartItems);
   return (
     <Fragment>
       <div className={className}>
@@ -24,8 +26,9 @@ const Cart = ({ className, setCart }) => {
           </div>
 
           <div className="cart__list">
-            <Item />
-            <Item />
+            {cartItems.map((item) => {
+              return <Item itemList={cartItems} itemDetails={item} />;
+            })}
           </div>
         </div>
         <div className="cart__options">
@@ -43,4 +46,8 @@ const Cart = ({ className, setCart }) => {
   );
 };
 
-export default Cart;
+const mapStateToProps = (state) => ({
+  cartItems: state.cart.items,
+});
+
+export default connect(mapStateToProps)(Cart);

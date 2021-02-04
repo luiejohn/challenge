@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import { setCurrentCategory } from "../../../store/category/category.actions";
 
 import "./Category.scss";
 
@@ -8,9 +9,7 @@ import ItemList from "../../../components/common/itemsList/itemList";
 // import ItemList2 from '../../../components/common/itemList2/itemList2';
 import BrandHeader from "../../../components/common/brandHeader/brandHeader";
 
-const CategoryPage = (props) => {
-  const [currentCategory, setCurrentCategory] = useState("");
-
+const CategoryPage = ({ match, setCategory }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -18,6 +17,10 @@ const CategoryPage = (props) => {
     //     cleanup
     // };
   }, []);
+
+  useEffect(() => {
+    setCategory(match.params.category);
+  }, [match.params.category]);
 
   return (
     <Fragment>
@@ -48,4 +51,8 @@ const CategoryPage = (props) => {
   );
 };
 
-export default withRouter(CategoryPage);
+const mapDispatchToProps = (dispatch) => ({
+  setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+});
+
+export default connect(null, mapDispatchToProps)(CategoryPage);
