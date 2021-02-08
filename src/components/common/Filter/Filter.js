@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 
 import "./Filter.scss";
-import "react-input-range/lib/css/index.css";
 import Checkbox from "rc-checkbox";
 import "rc-checkbox/assets/index.css";
 import svg from "../../../assets/Icon/sprite.svg";
