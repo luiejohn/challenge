@@ -36,7 +36,7 @@ const ItemPage = (props) => {
       setQuantity(quantity - 1);
     }
   };
-
+  console.log(props);
   const addItemToCart = () => {
     const ItemId = props.match.params.id;
     const itemToAdd = items.filter((item) => item.id == ItemId);

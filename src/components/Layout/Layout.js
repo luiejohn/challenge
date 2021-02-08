@@ -45,11 +45,7 @@ const Layout = ({ setUser }) => {
         <Switch>
           <Route exact path="/category/" component={CategoryPage} />
           <Route exact path="/category/:category" component={CategoryPage} />
-          <Route
-            exact
-            path="/category/:category/item/:id"
-            component={ItemPage}
-          />
+          <Route path="/category/:category/item/:id" component={ItemPage} />
           <Route exact path="/" component={Home} />
         </Switch>
       </div>
