@@ -23,7 +23,6 @@ class SignUpModal extends React.Component {
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name + " " + value);
     this.setState({ [name]: value });
   };
 

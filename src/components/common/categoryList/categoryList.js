@@ -1,29 +1,14 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { categories } from "./../../../store/dummy";
 import "./categoryList.scss";
 
 import { setCurrentCategory } from "../../../store/category/category.actions";
 
 const Category = (props) => {
-  console.log(props);
-  // useEffect(()=> {
-  //   setCurrentCategory
-  // }, [])
-
-  const matchCategory = () => {
-    let newCategory = categories.filter((category) => {
-      return category.name === props.currentCategory;
-    });
-    console.log(newCategory);
-    return newCategory;
-  };
-
   const renderCat = () => {
-    const subCat = matchCategory();
-    let component = subCat[0].subcat.map((category) => {
-      return <div key={category.id}>{category.name}</div>;
+    let component = props.subCategories.map((category, index) => {
+      return <div key={`cat-${index}`}>{category}</div>;
     });
 
     return component;
@@ -37,7 +22,7 @@ const Category = (props) => {
         </h1>
 
         <div className="category__list">
-          {props.currentCategory ? renderCat() : "Loading ..."}
+          {props.subCategories ? renderCat() : "Loading ..."}
         </div>
 
         {/* <div> Accessories </div>

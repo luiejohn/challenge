@@ -9,7 +9,14 @@ const QuantityCounter = ({ increase, decrease, quantity, centered, title }) => {
       <div
         className={!centered ? "quantityCounter" : "quantityCounter_centered"}
       >
-        <div className="quantityCounter-control" onClick={() => decrease()}>
+        <div
+          className={
+            quantity <= 1
+              ? "quantityCounter-control quantityCounter-disabled"
+              : "quantityCounter-control"
+          }
+          onClick={() => decrease()}
+        >
           {" "}
           -{" "}
         </div>

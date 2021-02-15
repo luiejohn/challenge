@@ -14,10 +14,11 @@
     // border: 1px solid red;
     display: flex;
     flex-direction: column;
+    // background-color: #ccc;
 
     &-preview {
       flex: 1;
-
+      // background-color: #ccc;
       display: flex;
       justify-content: center;
       align-items: center;

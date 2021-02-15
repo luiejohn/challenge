@@ -51,6 +51,7 @@ const Filter = ({ className, currentCat }) => {
           <SizeFilter
             selectedSize={selectedSize}
             setSelectedSize={setSelectedSize}
+            sizes={["S", "M", "L", "XL"]}
           />
 
           <div className="filter__range__pr-range">

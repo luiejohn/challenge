@@ -26,7 +26,6 @@ const Navigation = ({
   const [isSignInModal, setSignInModal] = useState(false);
   const [isSignUpModal, setSignUpModal] = useState(false);
 
-  console.log(cartTotalItems);
   useEffect(() => {
     // setSignInModal(currentUser ? false : true);
   }, [currentUser]);

@@ -24,7 +24,8 @@
     height: 3.5rem;
     width: 3.5rem;
     padding: 1rem;
-    background-color: #ccc;
+    background-color: #f62f5e;
+    color: #fff;
     border-radius: 50%;
     font-size: 3rem;
     cursor: pointer;
@@ -40,6 +41,10 @@
     // &:active {
     //     color: none;
     // }
+  }
+
+  &-disabled {
+    background-color: #ccc !important;
   }
 
   &-content {

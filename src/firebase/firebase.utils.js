@@ -17,7 +17,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
-  console.log(userAuth);
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -33,9 +32,59 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.log("error creating user " + error);
     }
   }
-  console.log(snapShot.exists);
 
   return userRef;
+};
+
+// Use when setting initial data to firebase
+
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = firestore.collection(collectionKey);
+
+//   const batch = firestore.batch();
+//   objectsToAdd.forEach((obj) => {
+//     const newDocRef = collectionRef.doc();
+//     batch.set(newDocRef, obj);
+//   });
+
+//   return await batch.commit();
+// };
+
+export const convertCollectionDataToMap = (collections) => {
+  let subCat = [];
+  const transformCollection = collections.docs.map((doc) => {
+    const newData = {
+      ...doc.data(),
+      id: doc.id,
+    };
+
+    subCat = [...subCat, ...doc.data().subCategory];
+
+    return newData;
+  });
+
+  const uniqueSubCat = new Set(subCat);
+  const mappedData = {
+    subCategories: [...uniqueSubCat],
+    dataCollection: transformCollection,
+  };
+
+  return mappedData;
+};
+
+export const getSingleItemData = async (category, itemId) => {
+  const itemRef = firestore.doc(`${category}/${itemId}`);
+  const snapShotData = await itemRef.get();
+  const newData = {
+    ...snapShotData.data(),
+  };
+
+  // const newData = Promise.resolve(snapShotData.data()).then((data) => data);
+  console.log(newData);
+  return newData;
 };
 
 firebase.initializeApp(config);

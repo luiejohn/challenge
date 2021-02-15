@@ -10,7 +10,13 @@ import CategoryPage from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
 import ItemPage from "./../Pages/Item/ItemPage";
 
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+// import { catBrands } from "../../store/dummy";
+
+import {
+  auth,
+  createUserProfileDocument,
+  // addCollectionAndDocuments,
+} from "../../firebase/firebase.utils";
 import { setCurrentUser } from "../../store/user/user.actions";
 
 const Layout = ({ setUser }) => {
@@ -30,6 +36,8 @@ const Layout = ({ setUser }) => {
         setUser(userAuth);
       }
     });
+
+    // addCollectionAndDocuments("Brands", catBrands);
 
     return () => {
       //Clean up
@@ -56,6 +64,8 @@ const Layout = ({ setUser }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   setUser: (user) => dispatch(setCurrentUser(user)),
+  // addCollections: (collections) =>
+  //   dispatch(addCollectionAndDocuments(collections)),
 });
 
 export default connect(null, mapDispatchToProps)(Layout);

@@ -8,22 +8,22 @@ import "./card.scss";
 import Shirt from "../../../assets/images/christmas-seal.gif";
 import svg from "../../../assets/Icon/sprite.svg";
 
-const Card = (props) => {
+const Card = ({ match, key, item }) => {
   // console.log(props);
   const [isWishList, wishList] = useState(false);
 
   let heartIcon = isWishList ? "#icon-heart" : "#icon-heart-outlined";
 
   return (
-    <div className="item-card">
+    <div key={key} className="item-card">
       <div className="item-card__image">
-        <img src={Shirt} alt="shirt" />
+        <img src={item.imageUrl} alt="shirt" />
       </div>
 
       <div className="item-card__desc">
-        <div className="item-card__title">Men's T-shirt</div>
+        <div className="item-card__title">{item.itemName}</div>
 
-        <div className="item-card__price">$14.99</div>
+        <div className="item-card__price">${item.price}</div>
       </div>
 
       <div className="item-card__quickview">
@@ -37,7 +37,7 @@ const Card = (props) => {
 
         <Link
           to={{
-            pathname: props.match.url + "/item/" + props.item.id,
+            pathname: match.url + "/item/" + item.id,
           }}
           style={{ textDecoration: "none" }}
         >

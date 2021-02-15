@@ -5,16 +5,21 @@ import "./itemList.scss";
 import Filter from "./../Filter/Filter";
 import Card from "./../card/card";
 import { items } from "../../../store/dummy";
+import Loading from "../loading/loading";
 
-const ItemList = () => {
+const ItemList = ({ shopItems }) => {
   return (
     <Fragment>
-      <div className="itemList">
-        <Filter className="itemList__filter" />
-        {items.map((item) => {
-          return <Card key={item.id} item={item} />;
-        })}
-      </div>
+      {shopItems.length === 0 ? (
+        <Loading />
+      ) : (
+        <div className="itemList">
+          <Filter className="itemList__filter" />
+          {shopItems.map((item) => {
+            return <Card key={`asd23123asds-${item.id}`} item={item} />;
+          })}
+        </div>
+      )}
     </Fragment>
   );
 };

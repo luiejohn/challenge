@@ -1,6 +1,10 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { setCurrentCategory } from "../../../store/category/category.actions";
+import {
+  setCurrentCategory,
+  setShopItems,
+  setSubCategories,
+} from "../../../store/category/category.actions";
 
 import "./Category.scss";
 
@@ -9,25 +13,46 @@ import ItemList from "../../../components/common/itemsList/itemList";
 // import ItemList2 from '../../../components/common/itemList2/itemList2';
 import BrandHeader from "../../../components/common/brandHeader/brandHeader";
 
-const CategoryPage = ({ match, setCategory }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
+import {
+  firestore,
+  convertCollectionDataToMap,
+} from "../../../firebase/firebase.utils";
 
-    // return () => {
-    //     cleanup
-    // };
-  }, []);
+const CategoryPage = ({
+  match,
+  setCategory,
+  setItems,
+  shopItems,
+  setSubCat,
+  subCategories,
+}) => {
+  const [loading, setLoading] = useState(false);
+  console.log(subCategories);
 
   useEffect(() => {
     setCategory(match.params.category);
+    const collectionRef = firestore.collection(match.params.category);
+
+    try {
+      setLoading(true);
+      collectionRef.onSnapshot(async (snapshop) => {
+        const Items = await convertCollectionDataToMap(snapshop);
+        console.log(Items.subCategories);
+        setItems(Items.dataCollection);
+        setSubCat(Items.subCategories);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, [match.params.category]);
 
   return (
     <Fragment>
       <div className="category-content">
         <div className="container-center">
-          <Category />
-          <ItemList />
+          <Category subCategories={subCategories} />
+          <ItemList shopItems={shopItems} />
           {/* <ItemList2 /> */}
           <BrandHeader />
         </div>
@@ -51,8 +76,15 @@ const CategoryPage = ({ match, setCategory }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+const mapStateToProps = (state) => ({
+  shopItems: state.category.items,
+  subCategories: state.category.subCategories,
 });
 
-export default connect(null, mapDispatchToProps)(CategoryPage);
+const mapDispatchToProps = (dispatch) => ({
+  setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+  setItems: (items) => dispatch(setShopItems(items)),
+  setSubCat: (subCat) => dispatch(setSubCategories(subCat)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

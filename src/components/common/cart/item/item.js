@@ -18,7 +18,9 @@ const Item = ({
   setItemCount,
   cartItemCount,
   setTotPrice,
+  totalCartPrice,
 }) => {
+  console.log(itemDetails);
   const increase = () => {
     let totalPrice = 0;
     const updatedItemList = itemList.map((item) => {
@@ -54,6 +56,7 @@ const Item = ({
   const removeItemFromCart = () => {
     const newItemList = itemList.filter((item) => item.id !== itemDetails.id);
 
+    setTotPrice(totalCartPrice - itemDetails.priceTotal);
     setItemCount(newItemList.length);
     removeItem(newItemList);
   };
@@ -61,7 +64,9 @@ const Item = ({
   return (
     <div className="cart__items">
       <div className="cart__items__item">
-        <div className="cart__items__item-image">image</div>
+        <div className="cart__items__item-image">
+          <img src={itemDetails.imageUrl} />
+        </div>
         <div className="cart__items__item-title">{itemDetails.title}</div>
         <div className="cart__items__item-id">{itemDetails.id}</div>
         <div className="cart__items__item-remove" onClick={removeItemFromCart}>
@@ -94,6 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   cartItemCount: state.cart.totalItemCount,
+  totalCartPrice: state.cart.totalCartPrice,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item);

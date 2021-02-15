@@ -7,6 +7,7 @@ import svg from "../../../assets/Icon/sprite.svg";
 import Empty from "../empty/empty";
 
 const Cart = ({ className, setCart, cartItems, cartItemCount }) => {
+  console.log(cartItems);
   return (
     <Fragment>
       <div className={className}>

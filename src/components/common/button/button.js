@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import svg from "../../../assets/Icon/sprite.svg";
 import "./button.scss";
 
-const Button = ({ primary, icon, children, click }) => {
+const Button = ({ primary, icon, children, click, disabled }) => {
   const [isWishList, wishList] = useState(false);
 
   let heartIcon = isWishList ? "#icon-heart" : "#icon-heart-outlined";
 
   return primary ? (
-    <div className="btn-md btn-primary" onClick={click}>
+    <div
+      className={
+        disabled ? "btn-md btn-primary disabled" : "btn-md btn-primary"
+      }
+      onClick={disabled ? () => {} : click}
+    >
       {children}
     </div>
   ) : (
     <div
-      className="btn-md btn-secondary"
-      onClick={click}
+      className={
+        disabled ? "btn-md btn-secondary disabled" : "btn-md btn-secondary"
+      }
+      onClick={disabled ? () => {} : click}
       onMouseEnter={() => wishList(!isWishList)}
       onMouseLeave={() => wishList(!isWishList)}
     >
