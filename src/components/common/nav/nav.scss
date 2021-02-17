@@ -51,7 +51,13 @@
       font-weight: 700;
 
       & > *:not(:last-child) {
-        margin-right: 4.5rem;
+        margin-right: 23px;
+      }
+
+      &-wishlist {
+        position: relative;
+        display: flex;
+        align-items: center;
       }
 
       &-sum {
@@ -71,6 +77,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      &-totalPrice div {
+        text-align: left;
+        display: inline-block;
+        min-width: 55px;
       }
 
       &-icon {

@@ -1,51 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import Button from "../button/button";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
 import "./card.scss";
+import { getUserWishList } from "../../../store/user/user.actions";
 
-// import Shirt from '../../../assets/images/shirt.png'
-import Shirt from "../../../assets/images/christmas-seal.gif";
 import svg from "../../../assets/Icon/sprite.svg";
+import {
+  addItemOnWishlist,
+  checkWishList,
+  removeIemOnWishList,
+  getWishList,
+} from "../../../firebase/firebase.utils";
 
-const Card = ({ match, key, item }) => {
-  // console.log(props);
-  const [isWishList, wishList] = useState(false);
+const Card = ({ match, key, item, currentUser, setModal, refreshWishList }) => {
+  const [isWishListed, setWishListed] = useState(false);
 
-  let heartIcon = isWishList ? "#icon-heart" : "#icon-heart-outlined";
+  const addToWishList = (itemId) => {
+    addItemOnWishlist(currentUser.id, itemId);
+    checkWishList(currentUser.id, item.id).then((res) => {
+      setWishListed(true);
+    });
+    getWishList(currentUser.id).then((data) => {
+      refreshWishList(data.wishList);
+    });
+  };
+
+  const removeToWishList = (itemId) => {
+    removeIemOnWishList(currentUser.id, itemId);
+    checkWishList(currentUser.id, item.id).then((res) => {
+      setWishListed(false);
+    });
+    getWishList(currentUser.id).then((data) => {
+      refreshWishList(data.wishList);
+    });
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      checkWishList(currentUser.id, item.id).then((res) => {
+        setWishListed(res);
+      });
+    } else {
+      setWishListed(false);
+    }
+  }, [currentUser]);
+
+  const checkWishListParams = () => {
+    if (currentUser) {
+      if (isWishListed) {
+        return removeToWishList(item.id);
+      } else {
+        addToWishList(item.id);
+      }
+    } else {
+      return setModal(true);
+    }
+  };
 
   return (
-    <div key={key} className="item-card">
-      <div className="item-card__image">
-        <img src={item.imageUrl} alt="shirt" />
+    <>
+      <div key={key} className="item-card">
+        <div className="item-card__image">
+          <img src={item.imageUrl} alt="shirt" />
+        </div>
+
+        <div className="item-card__desc">
+          <div className="item-card__title">{item.itemName}</div>
+
+          <div className="item-card__price">${item.price}</div>
+        </div>
+
+        <div className="item-card__quickview">
+          <svg
+            className="item-card__quickview__icon"
+            onClick={() => checkWishListParams()}
+          >
+            <use
+              xlinkHref={
+                isWishListed
+                  ? `${svg}${"#icon-heart"}`
+                  : `${svg}${"#icon-heart-outlined"}`
+              }
+            ></use>
+          </svg>
+
+          <Link
+            to={{
+              pathname: match.url + "/item/" + item.id,
+            }}
+            style={{ textDecoration: "none" }}
+          >
+            <Button primary>Quick View</Button>
+          </Link>
+        </div>
       </div>
-
-      <div className="item-card__desc">
-        <div className="item-card__title">{item.itemName}</div>
-
-        <div className="item-card__price">${item.price}</div>
-      </div>
-
-      <div className="item-card__quickview">
-        <svg
-          onMouseEnter={() => wishList(!isWishList)}
-          onMouseLeave={() => wishList(!isWishList)}
-          className="item-card__quickview__icon"
-        >
-          <use xlinkHref={`${svg}${heartIcon}`}></use>
-        </svg>
-
-        <Link
-          to={{
-            pathname: match.url + "/item/" + item.id,
-          }}
-          style={{ textDecoration: "none" }}
-        >
-          <Button primary>Quick View</Button>
-        </Link>
-      </div>
-    </div>
+    </>
   );
 };
 
-export default withRouter(Card);
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  refreshWishList: (items) => dispatch(getUserWishList(items)),
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Card);

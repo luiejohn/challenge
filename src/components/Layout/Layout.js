@@ -9,12 +9,13 @@ import Footer from "../common/footer/footer";
 import CategoryPage from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
 import ItemPage from "./../Pages/Item/ItemPage";
-
+import Alert from "../common/alert/alert";
 // import { catBrands } from "../../store/dummy";
 
 import {
   auth,
   createUserProfileDocument,
+  createUserWishlist,
   // addCollectionAndDocuments,
 } from "../../firebase/firebase.utils";
 import { setCurrentUser } from "../../store/user/user.actions";
@@ -25,6 +26,7 @@ const Layout = ({ setUser }) => {
       //Check if user already exist using Google OAuth
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
+        const userWishlist = await createUserWishlist(userAuth);
 
         userRef.onSnapshot((snapShot) => {
           setUser({
@@ -48,7 +50,7 @@ const Layout = ({ setUser }) => {
   return (
     <Fragment>
       <Navigation />
-
+      {/* <Alert /> */}
       <div className="content">
         <Switch>
           <Route exact path="/category/" component={CategoryPage} />

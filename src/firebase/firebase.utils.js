@@ -17,6 +17,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
+  console.log(userAuth.uid);
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -34,6 +35,55 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+//Initialize for new users
+export const createUserWishlist = async (userAuth, additionalData) => {
+  const userWishlist = firestore.doc(`wishlist/${userAuth.uid}`);
+  const snapShot = await userWishlist.get();
+  if (!snapShot.exists) {
+    await userWishlist.set({
+      id: snapShot.id,
+      wishList: [],
+    });
+  }
+};
+
+export const getWishList = async (userId) => {
+  const userWishlist = firestore.doc(`wishlist/${userId}`);
+  const snapShot = await userWishlist.get();
+
+  return snapShot.data();
+};
+
+export const addItemOnWishlist = async (userId, itemId) => {
+  const userWishlist = firestore.doc(`wishlist/${userId}`);
+
+  try {
+    await userWishlist.update({
+      wishList: firebase.firestore.FieldValue.arrayUnion(itemId),
+    });
+  } catch (error) {
+    console.log("error adding wishlist " + error);
+  }
+};
+
+export const removeIemOnWishList = async (userId, itemId) => {
+  const userWishlist = firestore.doc(`wishlist/${userId}`);
+
+  try {
+    await userWishlist.update({
+      wishList: firebase.firestore.FieldValue.arrayRemove(itemId),
+    });
+  } catch (error) {
+    console.log("error removing wishlist " + error);
+  }
+};
+
+export const checkWishList = async (userId, itemId) => {
+  const data = await getWishList(userId);
+  const res = data.wishList.find((item) => item === itemId);
+  return res ? true : false;
 };
 
 // Use when setting initial data to firebase
@@ -82,8 +132,6 @@ export const getSingleItemData = async (category, itemId) => {
     ...snapShotData.data(),
   };
 
-  // const newData = Promise.resolve(snapShotData.data()).then((data) => data);
-  console.log(newData);
   return newData;
 };
 

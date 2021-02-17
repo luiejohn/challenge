@@ -9,6 +9,8 @@ import ColorSelector from "../../common/colorSelector/colorSelector";
 import Button from "../../common/button/button";
 import svg from "../../../assets/Icon/sprite.svg";
 import Loading from "../../common/loading/loading";
+import Alert from "../../common/alert/alert";
+import Modal from "../../common/Modal/modal";
 
 import {
   addCartItem,
@@ -16,14 +18,19 @@ import {
   setTotalPrice,
 } from "../../../store/cart/cart.actions";
 
-import { getSingleItemData } from "../../../firebase/firebase.utils";
+import { getUserWishList } from "../../../store/user/user.actions";
+
+import {
+  getSingleItemData,
+  checkWishList,
+  addItemOnWishlist,
+  removeIemOnWishList,
+  getWishList,
+} from "../../../firebase/firebase.utils";
 import { setCurrentItem } from "../../../store/category/category.actions";
 
 import { Carousel } from "react-responsive-carousel";
 import shirt1 from "../../../assets/images/images-shirt11.png";
-import shirt2 from "../../../assets/images/images-shirt12.png";
-import shirt3 from "../../../assets/images/images-shirt13.png";
-import { items } from "../../../store/dummy";
 
 const ItemPage = ({
   match,
@@ -33,11 +40,15 @@ const ItemPage = ({
   addToCart,
   setItemPage,
   currentItem,
+  currentUser,
+  refreshWishList,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(1);
   const [isAlreadyInCart, setAlreadyInCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState("XS");
+  const [isWishListed, setWishListed] = useState(false);
+  const [isModal, setModal] = useState(false);
 
   useEffect(() => {
     getSingleItemData(match.params.category, match.params.id).then((res) => {
@@ -71,6 +82,16 @@ const ItemPage = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (currentUser) {
+      checkWishList(currentUser.id, match.params.id).then((res) => {
+        setWishListed(res);
+      });
+    } else {
+      setWishListed(false);
+    }
+  }, [currentUser]);
+
   const increase = () => {
     setQuantity(quantity + 1);
   };
@@ -102,6 +123,38 @@ const ItemPage = ({
     setTotalPrice(totalPrice);
     setItemCount(updatedItemList.length);
     addToCart(updatedItemList);
+  };
+
+  const checkWishListParams = () => {
+    if (currentUser) {
+      if (isWishListed) {
+        return removeToWishList(match.params.id);
+      } else {
+        addToWishList(match.params.id);
+      }
+    } else {
+      return setModal(true);
+    }
+  };
+
+  const addToWishList = (itemId) => {
+    addItemOnWishlist(currentUser.id, itemId);
+    checkWishList(currentUser.id, match.params.id).then((res) => {
+      setWishListed(true);
+    });
+    getWishList(currentUser.id).then((data) => {
+      refreshWishList(data.wishList);
+    });
+  };
+
+  const removeToWishList = (itemId) => {
+    removeIemOnWishList(currentUser.id, itemId);
+    checkWishList(currentUser.id, match.params.id).then((res) => {
+      setWishListed(false);
+    });
+    getWishList(currentUser.id).then((data) => {
+      refreshWishList(data.wishList);
+    });
   };
 
   return (
@@ -183,9 +236,22 @@ const ItemPage = ({
                   click={addItemToCart}
                   disabled={isAlreadyInCart}
                 >
-                  {isAlreadyInCart ? "Already Added" : "Add to Cart"}
+                  {isAlreadyInCart ? "Added to Cart" : "Add to Cart"}
                 </Button>
-                <Button icon>Add to Wishlist</Button>
+                <Button click={checkWishListParams}>
+                  <span>
+                    <svg className="btn__icon">
+                      <use
+                        xlinkHref={
+                          isWishListed
+                            ? `${svg}${"#icon-heart"}`
+                            : `${svg}${"#icon-heart-outlined"}`
+                        }
+                      ></use>
+                    </svg>
+                  </span>
+                  {isWishListed ? "Added to Wishlist" : "Add To Wishlist"}
+                </Button>
                 {/* <button className="btn-md btn-primary">Add to Cart</button> */}
                 {/* <button className="btn-md btn-secondary">Add to Wishlist</button> */}
               </div>
@@ -348,6 +414,7 @@ const ItemPage = ({
 const mapStateToProps = (state) => ({
   cartItems: state.cart.items,
   currentItem: state.category.currentItem,
+  currentUser: state.user.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -355,6 +422,7 @@ const mapDispatchToProps = (dispatch) => ({
   setItemCount: (number) => dispatch(setTotalItemCount(number)),
   setTotalPrice: (number) => dispatch(setTotalPrice(number)),
   setItemPage: (item) => dispatch(setCurrentItem(item)),
+  refreshWishList: (items) => dispatch(getUserWishList(items)),
 });
 
 export default compose(

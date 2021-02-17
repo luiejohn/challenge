@@ -13,6 +13,8 @@ import Cart from "./../cart/cart";
 import { auth } from "../../../firebase/firebase.utils";
 
 import { setCurrentCategory } from "../../../store/category/category.actions";
+import { getUserWishList } from "../../../store/user/user.actions";
+import { getWishList } from "../../../firebase/firebase.utils";
 
 const Navigation = ({
   currentUser,
@@ -21,13 +23,20 @@ const Navigation = ({
   // match,
   cartTotalItems,
   cartTotalPrice,
+  setWishList,
+  userWishList,
 }) => {
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
   const [isSignUpModal, setSignUpModal] = useState(false);
 
   useEffect(() => {
-    // setSignInModal(currentUser ? false : true);
+    if (currentUser) {
+      getWishList(currentUser.id).then((data) => {
+        // console.log(data.wishList);
+        setWishList(data.wishList);
+      });
+    }
   }, [currentUser]);
 
   useEffect(() => {
@@ -85,7 +94,17 @@ const Navigation = ({
             </div>
 
             <div className="navigation__cart__bag">
-              <div>flag</div>
+              {currentUser ? (
+                <div className="navigation__cart__bag-wishlist">
+                  <svg className="navigation__cart__bag-icon">
+                    <use xlinkHref={`${svg}#icon-heart`}></use>
+                  </svg>
+                  <span className="navigation__cart__bag-count">
+                    {userWishList.length}
+                  </span>
+                </div>
+              ) : null}
+
               <div className="navigation__cart__bag-sum">
                 <div
                   className="navigation__cart__bag-icon-container"
@@ -94,12 +113,16 @@ const Navigation = ({
                   <svg className="navigation__cart__bag-icon">
                     <use xlinkHref={`${svg}#icon-shopping-cart`}></use>
                   </svg>
-                  <span className="navigation__cart__bag-count">
-                    {cartTotalItems}
-                  </span>
+                  {cartTotalItems > 0 ? (
+                    <span className="navigation__cart__bag-count">
+                      {cartTotalItems}
+                    </span>
+                  ) : null}
                 </div>
 
-                <div>Your Bag: ${cartTotalPrice}</div>
+                <div className="navigation__cart__bag-totalPrice">
+                  Your Bag: <div>${cartTotalPrice}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -207,6 +230,7 @@ const Navigation = ({
 
 const mapDispatchToProps = (dispatch) => ({
   setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+  setWishList: (items) => dispatch(getUserWishList(items)),
 });
 
 const mapStateToProps = (state) => ({
@@ -215,6 +239,7 @@ const mapStateToProps = (state) => ({
   cartTotalItems: state.cart.totalItemCount,
   cartTotalPrice: state.cart.totalCartPrice,
   cartItemList: state.cart.items,
+  userWishList: state.user.wishList,
 });
 
 export default compose(

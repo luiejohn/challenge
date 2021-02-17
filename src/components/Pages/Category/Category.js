@@ -27,7 +27,6 @@ const CategoryPage = ({
   subCategories,
 }) => {
   const [loading, setLoading] = useState(false);
-  console.log(subCategories);
 
   useEffect(() => {
     setCategory(match.params.category);
@@ -37,7 +36,6 @@ const CategoryPage = ({
       setLoading(true);
       collectionRef.onSnapshot(async (snapshop) => {
         const Items = await convertCollectionDataToMap(snapshop);
-        console.log(Items.subCategories);
         setItems(Items.dataCollection);
         setSubCat(Items.subCategories);
         setLoading(false);

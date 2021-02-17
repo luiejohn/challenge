@@ -2,6 +2,7 @@ import { userActionTypes } from "./user.types";
 
 const INITITIAL_STATE = {
   currentUser: null,
+  wishList: [],
 };
 
 const userReducer = (state = INITITIAL_STATE, action) => {
@@ -10,6 +11,11 @@ const userReducer = (state = INITITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    case userActionTypes.GET_WISHLIST:
+      return {
+        ...state,
+        wishList: action.payload,
       };
 
     default:

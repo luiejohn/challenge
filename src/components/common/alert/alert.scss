@@ -1,0 +1,32 @@
+.alert_container {
+  position: fixed;
+
+  width: 100%;
+  //   height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  top: 10px;
+  transition: all 0.3s ease-out;
+}
+
+.alert_show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.alert_hide {
+  transform: translateY(-100vh);
+  opacity: 0;
+}
+
+.alert_content {
+  font-size: 1.2rem;
+  min-width: 300px;
+  padding: 15px;
+  background-color: #f5265e;
+  color: #fff;
+  border-radius: 100px;
+}

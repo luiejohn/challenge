@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import svg from "../../../assets/Icon/sprite.svg";
 import "./button.scss";
 
-const Button = ({ primary, icon, children, click, disabled }) => {
+const Button = ({ primary, children, click, disabled }) => {
   const [isWishList, wishList] = useState(false);
 
   let heartIcon = isWishList ? "#icon-heart" : "#icon-heart-outlined";
@@ -22,16 +22,7 @@ const Button = ({ primary, icon, children, click, disabled }) => {
         disabled ? "btn-md btn-secondary disabled" : "btn-md btn-secondary"
       }
       onClick={disabled ? () => {} : click}
-      onMouseEnter={() => wishList(!isWishList)}
-      onMouseLeave={() => wishList(!isWishList)}
     >
-      {icon ? (
-        <span>
-          <svg className="btn__icon">
-            <use xlinkHref={`${svg}${heartIcon}`}></use>
-          </svg>
-        </span>
-      ) : null}
       {children}
     </div>
   );
