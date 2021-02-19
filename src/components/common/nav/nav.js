@@ -10,6 +10,7 @@ import "./nav.scss";
 
 import svg from "../../../assets/Icon/sprite.svg";
 import Cart from "./../cart/cart";
+import WishList from "../wishlist/wishlist";
 import { auth } from "../../../firebase/firebase.utils";
 
 import { setCurrentCategory } from "../../../store/category/category.actions";
@@ -29,6 +30,7 @@ const Navigation = ({
   const [isCart, setCart] = useState(false);
   const [isSignInModal, setSignInModal] = useState(false);
   const [isSignUpModal, setSignUpModal] = useState(false);
+  const [isWishListModal, setWishListModal] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -52,6 +54,10 @@ const Navigation = ({
       setSignInModal(false);
       setSignUpModal(false);
     }
+  };
+
+  const onWishListClick = () => {
+    setWishListModal(false);
   };
 
   return (
@@ -95,13 +101,18 @@ const Navigation = ({
 
             <div className="navigation__cart__bag">
               {currentUser ? (
-                <div className="navigation__cart__bag-wishlist">
+                <div
+                  className="navigation__cart__bag-wishlist"
+                  onClick={() => setWishListModal(!isWishListModal)}
+                >
                   <svg className="navigation__cart__bag-icon">
                     <use xlinkHref={`${svg}#icon-heart`}></use>
                   </svg>
-                  <span className="navigation__cart__bag-count">
-                    {userWishList.length}
-                  </span>
+                  {userWishList.length > 0 ? (
+                    <span className="navigation__cart__bag-count">
+                      {userWishList.length}
+                    </span>
+                  ) : null}
                 </div>
               ) : null}
 
@@ -210,7 +221,7 @@ const Navigation = ({
             </div>
           </div>
 
-          <div
+          {/* <div
             className="container-center"
             style={{ position: "relative", margin: "0 auto" }}
           >
@@ -218,12 +229,49 @@ const Navigation = ({
               className={isCart ? "cart cart__show" : "cart cart__hide"}
               setCart={setCart}
             />
-          </div>
+          </div> */}
+
+          <Modal show={isCart} handleChange={setCart} width="80%">
+            <Cart
+              className={isCart ? "cart cart__show" : "cart cart__hide"}
+              setCart={setCart}
+            />
+          </Modal>
+
+          <Modal
+            show={isWishListModal}
+            handleChange={setWishListModal}
+            width="80%"
+          >
+            <WishList setCart={setWishListModal} />
+          </Modal>
         </div>
       </div>
 
       <SignInModal show={isSignInModal} handleChange={setSignInModal} />
       <SignUpModal show={isSignUpModal} handleChange={setSignUpModal} />
+
+      {/* <Modal
+        show={isWishListModal}
+        handleChange={setWishListModal}
+        width="800px"
+      >
+        <h3>My Wish List</h3>
+
+        <div className="viewWishList__container">
+          {userWishList.map((item) => (
+            <div className="viewWishList__item">
+              <div className="viewWishList__item-image">
+                <img src={item.imageUrl} />
+              </div>
+              <div className="viewWishList__item-name">
+                <span>{item.itemName}</span>
+              </div>
+              <div className="viewWishList__item-price">{item.price}</div>
+            </div>
+          ))}
+        </div>
+      </Modal> */}
     </Fragment>
   );
 };

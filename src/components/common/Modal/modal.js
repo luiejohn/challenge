@@ -13,6 +13,7 @@ const signIn = (props) => {
         onClick={() => props.handleChange(!props.show)}
       />
       <div
+        style={props.width ? { width: props.width } : {}}
         className={
           props.show ? "signInModal modal-show" : "signInModal modal-hide"
         }

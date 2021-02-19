@@ -17,7 +17,7 @@ import {
 
 const Card = ({ match, key, item, currentUser, setModal, refreshWishList }) => {
   const [isWishListed, setWishListed] = useState(false);
-
+  console.log(item);
   const addToWishList = (itemId) => {
     addItemOnWishlist(currentUser.id, itemId);
     checkWishList(currentUser.id, item.id).then((res) => {
@@ -51,9 +51,9 @@ const Card = ({ match, key, item, currentUser, setModal, refreshWishList }) => {
   const checkWishListParams = () => {
     if (currentUser) {
       if (isWishListed) {
-        return removeToWishList(item.id);
+        return removeToWishList(item);
       } else {
-        addToWishList(item.id);
+        addToWishList(item);
       }
     } else {
       return setModal(true);

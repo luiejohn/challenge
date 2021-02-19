@@ -56,24 +56,25 @@ export const getWishList = async (userId) => {
   return snapShot.data();
 };
 
-export const addItemOnWishlist = async (userId, itemId) => {
+export const addItemOnWishlist = async (userId, item) => {
   const userWishlist = firestore.doc(`wishlist/${userId}`);
 
   try {
     await userWishlist.update({
-      wishList: firebase.firestore.FieldValue.arrayUnion(itemId),
+      wishList: firebase.firestore.FieldValue.arrayUnion(item),
     });
   } catch (error) {
     console.log("error adding wishlist " + error);
   }
 };
 
-export const removeIemOnWishList = async (userId, itemId) => {
+export const removeIemOnWishList = async (userId, item) => {
+  console.log(item);
   const userWishlist = firestore.doc(`wishlist/${userId}`);
 
   try {
     await userWishlist.update({
-      wishList: firebase.firestore.FieldValue.arrayRemove(itemId),
+      wishList: firebase.firestore.FieldValue.arrayRemove(item),
     });
   } catch (error) {
     console.log("error removing wishlist " + error);
@@ -82,7 +83,7 @@ export const removeIemOnWishList = async (userId, itemId) => {
 
 export const checkWishList = async (userId, itemId) => {
   const data = await getWishList(userId);
-  const res = data.wishList.find((item) => item === itemId);
+  const res = data.wishList.find((item) => item.id === itemId);
   return res ? true : false;
 };
 

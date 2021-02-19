@@ -7,10 +7,15 @@
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   // border-radius: 3px;
   // padding: 1.6rem;
-  left: 36.66%;
+  // left: 36.66%;
   top: 10%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
+
+  margin-right: auto;
+  margin-left: auto;
+  right: 0;
+  left: 0;
 }
 
 .modal-show {

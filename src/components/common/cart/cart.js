@@ -7,10 +7,9 @@ import svg from "../../../assets/Icon/sprite.svg";
 import Empty from "../empty/empty";
 
 const Cart = ({ className, setCart, cartItems, cartItemCount }) => {
-  console.log(cartItems);
   return (
     <Fragment>
-      <div className={className}>
+      <div>
         <div className="padding-3">
           <div className="cart__countheader">
             <h2 className="cart__topheader">
