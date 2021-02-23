@@ -143,7 +143,7 @@ const Navigation = ({
           <div className="container-center">
             <div className="navigation__nav">
               <div className="navigation__nav__logo">
-                <Link to="/">SHOPMATE</Link>
+                <Link to="/">SHOPPEMATE</Link>
               </div>
 
               <nav className="navigation__nav__navlist">
@@ -250,28 +250,6 @@ const Navigation = ({
 
       <SignInModal show={isSignInModal} handleChange={setSignInModal} />
       <SignUpModal show={isSignUpModal} handleChange={setSignUpModal} />
-
-      {/* <Modal
-        show={isWishListModal}
-        handleChange={setWishListModal}
-        width="800px"
-      >
-        <h3>My Wish List</h3>
-
-        <div className="viewWishList__container">
-          {userWishList.map((item) => (
-            <div className="viewWishList__item">
-              <div className="viewWishList__item-image">
-                <img src={item.imageUrl} />
-              </div>
-              <div className="viewWishList__item-name">
-                <span>{item.itemName}</span>
-              </div>
-              <div className="viewWishList__item-price">{item.price}</div>
-            </div>
-          ))}
-        </div>
-      </Modal> */}
     </Fragment>
   );
 };

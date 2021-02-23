@@ -5,7 +5,7 @@ import "./Filter.scss";
 import Checkbox from "rc-checkbox";
 import "rc-checkbox/assets/index.css";
 import svg from "../../../assets/Icon/sprite.svg";
-import SizeFilter from "../SizeFilter/sizeFilter";
+import SizeFilterComponent from "../SizeFilter/sizeFilter";
 import ColorSelector from "../colorSelector/colorSelector";
 import Button from "../button/button";
 import { Range, getTrackBackground } from "react-range";
@@ -14,16 +14,25 @@ const STEP = 0.1;
 const MIN = 0;
 const MAX = 100;
 
-const Filter = ({ className, currentCat }) => {
-  const [selectedSize, setSelectedSize] = useState("XS");
-  let [color, setColor] = useState(1);
-  const [values, setValues] = React.useState([0, 100]);
+const Filter = ({
+  className,
+  currentCat,
+  itemsCount,
+  filterInfo,
+  applyFilter,
+  priceFilter,
+  sizeFilter,
+  clearFilter,
+}) => {
+  // const [selectedSize, setSelectedSize] = useState("");
+  // let [color, setColor] = useState(1);
+  // const [values, setValues] = React.useState([0, 100]);
 
   return (
     <Fragment>
       <div className={className}>
         <div className="filter__header">
-          <h3 className="filter__header-text">Filter 486 items</h3>
+          <h3 className="filter__header-text">Filter {itemsCount} items</h3>
 
           <div className="filter__header-gender">
             <svg className="filter__header-icon">
@@ -40,18 +49,18 @@ const Filter = ({ className, currentCat }) => {
             </svg>
             <div>
               <span>Sub Category:</span>
-              Dresses
+              {filterInfo.subCategory ? filterInfo.subCategory : "All"}
             </div>
           </div>
         </div>
 
         <div className="filter__range">
-          <ColorSelector color={color} setColor={setColor} />
+          {/* <ColorSelector color={color} setColor={setColor} /> */}
 
-          <SizeFilter
-            selectedSize={selectedSize}
-            setSelectedSize={setSelectedSize}
-            sizes={["S", "M", "L", "XL"]}
+          <SizeFilterComponent
+            selectedSize={sizeFilter.selectedSize}
+            setSelectedSize={sizeFilter.setSelectedSize}
+            sizes={["XS", "S", "M", "L", "XL"]}
           />
 
           <div className="filter__range__pr-range">
@@ -67,12 +76,12 @@ const Filter = ({ className, currentCat }) => {
                 }}
               >
                 <Range
-                  values={values}
+                  values={priceFilter.values}
                   step={STEP}
                   min={MIN}
                   max={MAX}
                   rtl={false}
-                  onChange={(values) => setValues(values)}
+                  onChange={(values) => priceFilter.setValues(values)}
                   renderTrack={({ props, children }) => (
                     <div
                       onMouseDown={props.onMouseDown}
@@ -91,7 +100,7 @@ const Filter = ({ className, currentCat }) => {
                           width: "100%",
                           borderRadius: "4px",
                           background: getTrackBackground({
-                            values,
+                            values: priceFilter.values,
                             colors: ["#ccc", "#548BF4", "#ccc"],
                             min: MIN,
                             max: MAX,
@@ -109,14 +118,9 @@ const Filter = ({ className, currentCat }) => {
                       {...props}
                       style={{
                         ...props.style,
-                        // height: "20px",
-                        // width: "20px",
-                        // borderRadius: "4px",
-                        // backgroundColor: "#FFF",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        // boxShadow: "0px 2px 6px #AAA",
                       }}
                     >
                       <div
@@ -133,7 +137,7 @@ const Filter = ({ className, currentCat }) => {
                           backgroundColor: "#f62f5e",
                         }}
                       >
-                        ${values[index].toFixed(1)}
+                        ${priceFilter.values[index].toFixed(1)}
                       </div>
                       <div
                         style={{
@@ -150,10 +154,11 @@ const Filter = ({ className, currentCat }) => {
           </div>
 
           <div className="filter__range__brand">
-            <h3 className="filter__range__brand-text">Brands</h3>
+            <h3 className="filter__range__brand-text">Deals</h3>
 
             <div className="filter__range__brand-ops">
-              <div>
+              <div>No deals at the moment</div>
+              {/* <div>
                 <div>
                   <input type="checkbox" id="1" />
                 </div>
@@ -208,15 +213,26 @@ const Filter = ({ className, currentCat }) => {
                   <input type="checkbox" />
                 </div>
                 <div>Brand 1</div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
 
         <div className="filter__apply">
           {/* <button className="btn-md btn-primary"> Apply </button> */}
-          <Button primary>Apply</Button>
-          <div>Clear All</div>
+          <Button
+            primary
+            click={() =>
+              applyFilter(
+                filterInfo.subCategory,
+                sizeFilter.selectedSize,
+                priceFilter.values
+              )
+            }
+          >
+            Apply
+          </Button>
+          <div onClick={clearFilter}>Clear Filter</div>
         </div>
       </div>
     </Fragment>
@@ -225,6 +241,8 @@ const Filter = ({ className, currentCat }) => {
 
 const mapStateToProps = (state) => ({
   currentCat: state.category.currentCategory,
+  itemsCount: state.category.items.length,
+  filterInfo: state.category.filter,
 });
 
 export default connect(mapStateToProps)(Filter);

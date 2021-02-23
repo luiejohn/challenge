@@ -59,8 +59,6 @@ class SignUpModal extends React.Component {
     const { displayName, email, password, confirmPassword } = this.state;
     const { show, handleChange } = this.props;
 
-    console.log(displayName);
-
     return (
       <Modal show={show} handleChange={handleChange}>
         <div className="signUp-cont">

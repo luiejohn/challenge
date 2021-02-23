@@ -6,9 +6,9 @@ const INITITIAL_STATE = {
   filter: {
     category: null,
     subCategory: null,
+    size: "",
     color: null,
-    priceMin: null,
-    priceMax: null,
+    price: [0, 100],
     brand: null,
   },
   items: [],
@@ -21,12 +21,25 @@ const categoryReducer = (state = INITITIAL_STATE, action) => {
       return {
         ...state,
         currentCategory: action.payload,
+        filter: {
+          ...state.filter,
+          category: action.payload,
+        },
       };
     case categoryActionTypes.SET_SUB_CATEGORIES:
       return {
         ...state,
         subCategories: action.payload,
       };
+    case categoryActionTypes.SET_SUBCAT_FILTER:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          subCategory: action.payload,
+        },
+      };
+
     case categoryActionTypes.SET_SHOP_ITEMS:
       return {
         ...state,

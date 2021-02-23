@@ -3,26 +3,57 @@ import { connect } from "react-redux";
 
 import "./categoryList.scss";
 
-import { setCurrentCategory } from "../../../store/category/category.actions";
+import {
+  setCurrentCategory,
+  setSubCatFilter,
+} from "../../../store/category/category.actions";
 
-const Category = (props) => {
+const Category = ({
+  currentCategory,
+  subCategories,
+  setSubCategory,
+  currentSubCat,
+  applyFilter,
+  setSelectedSize,
+  setPriceValue,
+}) => {
+  const getFilteredData = (subCat) => {
+    setSelectedSize("");
+    setPriceValue([0, 100]);
+    setSubCategory(subCat);
+    applyFilter(subCat);
+    // setFilter(subCat);
+  };
+
   const renderCat = () => {
-    let component = props.subCategories.map((category, index) => {
-      return <div key={`cat-${index}`}>{category}</div>;
-    });
+    if (subCategories) {
+      let component = subCategories.map((subCat, index) => {
+        return (
+          <div
+            key={`cat-${index}`}
+            onClick={() => getFilteredData(subCat)}
+            style={
+              currentSubCat.subCategory === subCat ? { color: "#f62f5e" } : null
+            }
+          >
+            {subCat}
+          </div>
+        );
+      });
 
-    return component;
+      return component;
+    }
   };
 
   return (
     <Fragment>
       <div className="category">
         <h1 className="category__header">
-          {props.currentCategory ? props.currentCategory : "Loading ..."}
+          {currentCategory ? currentCategory : "Loading ..."}
         </h1>
 
         <div className="category__list">
-          {props.subCategories ? renderCat() : "Loading ..."}
+          {subCategories ? renderCat() : "Loading ..."}
         </div>
 
         {/* <div> Accessories </div>
@@ -50,11 +81,13 @@ const Category = (props) => {
 
 const mapStateToProps = (state, ownProps) => ({
   currentCategory: state.category.currentCategory,
+  currentSubCat: state.category.filter,
   props: ownProps,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCategory: (cat) => dispatch(setCurrentCategory(cat)),
+  setSubCategory: (cat) => dispatch(setSubCatFilter(cat)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

@@ -8,16 +8,33 @@ import { items } from "../../../store/dummy";
 import Loading from "../loading/loading";
 import Modal from "../Modal/modal";
 
-const ItemList = ({ shopItems }) => {
+const ItemList = ({
+  shopItems,
+  loading,
+  applyFilter,
+  sizeFilter,
+  priceFilter,
+  clearFilter,
+  // priceFilterValue,
+  // priceFilterSet,
+}) => {
   const [isModal, setModal] = useState(false);
   return (
     <Fragment>
-      {shopItems.length === 0 ? (
+      {loading ? (
         <Loading />
       ) : (
         <>
           <div className="itemList">
-            <Filter className="itemList__filter" />
+            <Filter
+              className="itemList__filter"
+              applyFilter={applyFilter}
+              sizeFilter={sizeFilter}
+              priceFilter={priceFilter}
+              clearFilter={clearFilter}
+              // priceFilterValue={priceFilterValue}
+              // priceFilterSet={priceFilterSet}
+            />
             {shopItems.map((item) => {
               return <Card key={item.id} item={item} setModal={setModal} />;
             })}

@@ -17,7 +17,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
-  console.log(userAuth.uid);
+
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -104,16 +104,15 @@ export const checkWishList = async (userId, itemId) => {
 //   return await batch.commit();
 // };
 
-export const convertCollectionDataToMap = (collections) => {
+export const convertCollectionDataToMap = (collections, filter) => {
   let subCat = [];
   const transformCollection = collections.docs.map((doc) => {
     const newData = {
       ...doc.data(),
       id: doc.id,
     };
-
-    subCat = [...subCat, ...doc.data().subCategory];
-
+    subCat.push(doc.data().subCategory);
+    // subCat = [...subCat, ...doc.data().subCategory];
     return newData;
   });
 

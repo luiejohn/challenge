@@ -34,7 +34,13 @@ const WishList = ({ setCart, userWishList, userWishListCount }) => {
             ) : (
               <div className="wishList__list">
                 {userWishList.map((item) => {
-                  return <Item itemList={userWishList} itemDetails={item} />;
+                  return (
+                    <Item
+                      itemList={userWishList}
+                      itemDetails={item}
+                      key={`wishList-${item.id}`}
+                    />
+                  );
                 })}
               </div>
             )}
