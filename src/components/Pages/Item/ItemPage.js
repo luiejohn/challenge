@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import "./ItemPage.scss";
@@ -49,9 +49,8 @@ const ItemPage = ({
   const [selectedSize, setSelectedSize] = useState("XS");
   const [isWishListed, setWishListed] = useState(false);
   const [isModal, setModal] = useState(false);
-  console.log("reading");
+  console.log(currentItem);
   useEffect(() => {
-    console.log("read");
     getSingleItemData(match.params.category, match.params.id).then((res) => {
       setItemPage(res);
       setSelectedSize(res.sizes[0]);
@@ -188,7 +187,11 @@ const ItemPage = ({
 
             <div className="item__details">
               <div className="item__details__location">
-                Home - All Categories - Men's Clothing &amp; Accessories
+                <Link to="/">Home</Link> -{" "}
+                <Link to={`/category/${match.params.category}`}>
+                  {match.params.category}
+                </Link>{" "}
+                - {currentItem.itemName}
               </div>
               <div className="item__details__stars">
                 <svg className="btn__icon" style={{ fill: "#ffd27d" }}>

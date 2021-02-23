@@ -24,10 +24,6 @@ const Filter = ({
   sizeFilter,
   clearFilter,
 }) => {
-  // const [selectedSize, setSelectedSize] = useState("");
-  // let [color, setColor] = useState(1);
-  // const [values, setValues] = React.useState([0, 100]);
-
   return (
     <Fragment>
       <div className={className}>
