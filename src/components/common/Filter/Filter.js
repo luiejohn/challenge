@@ -232,7 +232,7 @@ const Filter = ({
           >
             Apply
           </Button>
-          <div onClick={clearFilter}>Clear Filter</div>
+          <Button click={clearFilter}>Clear Filter</Button>
         </div>
       </div>
     </Fragment>

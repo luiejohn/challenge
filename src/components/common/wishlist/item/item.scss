@@ -46,11 +46,16 @@
     }
   }
 
-  &__size {
+  &__link {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.6rem;
+
+    & a {
+      text-decoration: none;
+      color: #2e2e2e;
+    }
   }
 
   &__price {

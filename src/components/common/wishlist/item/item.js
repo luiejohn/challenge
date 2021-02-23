@@ -48,7 +48,7 @@ const Item = ({
         <div>${itemDetails.price}</div>
       </div>
 
-      <div className="wishList__items__size">
+      <div className="wishList__items__link">
         <Link
           to={`/category/${itemDetails.categories[0]}/item/${itemDetails.id}`}
           onClick={() => setCart(false)}
