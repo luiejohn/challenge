@@ -10,7 +10,7 @@ import Button from "../../common/button/button";
 import svg from "../../../assets/Icon/sprite.svg";
 import Loading from "../../common/loading/loading";
 import Alert from "../../common/alert/alert";
-import Modal from "../../common/Modal/modal";
+import SignInModal from "../../common/signInModal/signInModal";
 
 import {
   addCartItem,
@@ -18,7 +18,10 @@ import {
   setTotalPrice,
 } from "../../../store/cart/cart.actions";
 
-import { getUserWishList } from "../../../store/user/user.actions";
+import {
+  getUserWishList,
+  setSignInModal,
+} from "../../../store/user/user.actions";
 
 import {
   getSingleItemData,
@@ -42,14 +45,15 @@ const ItemPage = ({
   currentItem,
   currentUser,
   refreshWishList,
+  signInModal,
+  setSignIn,
 }) => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(1);
   const [isAlreadyInCart, setAlreadyInCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState("XS");
   const [isWishListed, setWishListed] = useState(false);
-  const [isModal, setModal] = useState(false);
-  console.log(currentItem);
+
   useEffect(() => {
     getSingleItemData(match.params.category, match.params.id).then((res) => {
       setItemPage(res);
@@ -133,7 +137,7 @@ const ItemPage = ({
         addToWishList(match.params.id);
       }
     } else {
-      return setModal(true);
+      return setSignIn(true);
     }
   };
 
@@ -163,6 +167,8 @@ const ItemPage = ({
         <Loading />
       ) : (
         <div className="container-center">
+          <SignInModal show={signInModal} handleChange={setSignIn} />
+
           <div className="item">
             <div className="item__image">
               {/* <Carousel autoPlay showArrows={false} showStatus={false} infiniteLoop showThumbs={true} interval={5000}>
@@ -417,6 +423,7 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.items,
   currentItem: state.category.currentItem,
   currentUser: state.user.currentUser,
+  signInModal: state.user.isSignInModal,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -425,6 +432,7 @@ const mapDispatchToProps = (dispatch) => ({
   setTotalPrice: (number) => dispatch(setTotalPrice(number)),
   setItemPage: (item) => dispatch(setCurrentItem(item)),
   refreshWishList: (items) => dispatch(getUserWishList(items)),
+  setSignIn: (val) => dispatch(setSignInModal(val)),
 });
 
 export default compose(

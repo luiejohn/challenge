@@ -3,6 +3,8 @@ import { userActionTypes } from "./user.types";
 const INITITIAL_STATE = {
   currentUser: null,
   wishList: [],
+  isSignInModal: false,
+  isSignUpModal: false,
 };
 
 const userReducer = (state = INITITIAL_STATE, action) => {
@@ -16,6 +18,17 @@ const userReducer = (state = INITITIAL_STATE, action) => {
       return {
         ...state,
         wishList: action.payload,
+      };
+
+    case userActionTypes.SET_SIGNIN_MODAL:
+      return {
+        ...state,
+        isSignInModal: action.payload,
+      };
+    case userActionTypes.SET_SIGNUP_MODAL:
+      return {
+        ...state,
+        isSignUpModal: action.payload,
       };
 
     default:

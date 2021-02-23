@@ -14,7 +14,11 @@ import WishList from "../wishlist/wishlist";
 import { auth } from "../../../firebase/firebase.utils";
 
 import { setCurrentCategory } from "../../../store/category/category.actions";
-import { getUserWishList } from "../../../store/user/user.actions";
+import {
+  getUserWishList,
+  setSignInModal,
+  setSignUpModal,
+} from "../../../store/user/user.actions";
 import { getWishList } from "../../../firebase/firebase.utils";
 
 const Navigation = ({
@@ -26,16 +30,17 @@ const Navigation = ({
   cartTotalPrice,
   setWishList,
   userWishList,
+  signInModal,
+  setSignIn,
+  signUpModal,
+  setSignUp,
 }) => {
   const [isCart, setCart] = useState(false);
-  const [isSignInModal, setSignInModal] = useState(false);
-  const [isSignUpModal, setSignUpModal] = useState(false);
   const [isWishListModal, setWishListModal] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
       getWishList(currentUser.id).then((data) => {
-        // console.log(data.wishList);
         setWishList(data.wishList);
       });
     }
@@ -51,8 +56,8 @@ const Navigation = ({
 
   const closeModal = (event) => {
     if (event.keyCode === 27) {
-      setSignInModal(false);
-      setSignUpModal(false);
+      setSignIn(false);
+      setSignUp(false);
     }
   };
 
@@ -82,13 +87,11 @@ const Navigation = ({
                 </span>
               ) : (
                 <span className="navigation__cart__greet-highlight">
-                  <span onClick={() => setSignInModal(!isSignInModal)}>
-                    Sign in
-                  </span>{" "}
-                  or{" "}
-                  <span onClick={() => setSignUpModal(!isSignUpModal)}>
-                    Register
+                  <span onClick={() => setSignIn(!signInModal)}>Sign in</span>{" "}
+                  <span style={{ color: "#2e2e2e", cursor: "initial" }}>
+                    or{" "}
                   </span>
+                  <span onClick={() => setSignUp(!signUpModal)}>Register</span>
                 </span>
               )}
             </div>
@@ -237,19 +240,20 @@ const Navigation = ({
               setCart={setCart}
             />
           </Modal>
-
-          <Modal
-            show={isWishListModal}
-            handleChange={setWishListModal}
-            width="80%"
-          >
-            <WishList setCart={setWishListModal} />
-          </Modal>
         </div>
       </div>
+      {currentUser ? (
+        <Modal
+          show={isWishListModal}
+          handleChange={setWishListModal}
+          width="80%"
+        >
+          <WishList setCart={setWishListModal} />
+        </Modal>
+      ) : null}
 
-      <SignInModal show={isSignInModal} handleChange={setSignInModal} />
-      <SignUpModal show={isSignUpModal} handleChange={setSignUpModal} />
+      <SignInModal show={signInModal} handleChange={setSignIn} />
+      <SignUpModal show={signUpModal} handleChange={setSignUp} />
     </Fragment>
   );
 };
@@ -257,6 +261,8 @@ const Navigation = ({
 const mapDispatchToProps = (dispatch) => ({
   setCategory: (cat) => dispatch(setCurrentCategory(cat)),
   setWishList: (items) => dispatch(getUserWishList(items)),
+  setSignIn: (val) => dispatch(setSignInModal(val)),
+  setSignUp: (val) => dispatch(setSignUpModal(val)),
 });
 
 const mapStateToProps = (state) => ({
@@ -266,6 +272,8 @@ const mapStateToProps = (state) => ({
   cartTotalPrice: state.cart.totalCartPrice,
   cartItemList: state.cart.items,
   userWishList: state.user.wishList,
+  signInModal: state.user.isSignInModal,
+  signUpModal: state.user.isSignUpModal,
 });
 
 export default compose(

@@ -1,12 +1,15 @@
 import React, { Fragment, useState } from "react";
+import { compose } from "redux";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./itemList.scss";
 import Filter from "./../Filter/Filter";
 import Card from "./../card/card";
-import { items } from "../../../store/dummy";
 import Loading from "../loading/loading";
-import Modal from "../Modal/modal";
+import SignInModal from "../signInModal/signInModal";
+
+import { setSignInModal } from "../../../store/user/user.actions";
 
 const ItemList = ({
   shopItems,
@@ -15,10 +18,11 @@ const ItemList = ({
   sizeFilter,
   priceFilter,
   clearFilter,
+  setSignIn,
+  signInModal,
   // priceFilterValue,
   // priceFilterSet,
 }) => {
-  const [isModal, setModal] = useState(false);
   return (
     <Fragment>
       {loading ? (
@@ -36,17 +40,26 @@ const ItemList = ({
               // priceFilterSet={priceFilterSet}
             />
             {shopItems.map((item) => {
-              return <Card key={item.id} item={item} setModal={setModal} />;
+              return <Card key={item.id} item={item} setModal={setSignIn} />;
             })}
           </div>
 
-          <Modal show={isModal} handleChange={setModal}>
-            You need login to use this feature
-          </Modal>
+          <SignInModal show={signInModal} handleChange={setSignIn} />
         </>
       )}
     </Fragment>
   );
 };
 
-export default withRouter(ItemList);
+const mapStateToProps = (state) => ({
+  signInModal: state.user.isSignInModal,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setSignIn: (val) => dispatch(setSignInModal(val)),
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(ItemList);

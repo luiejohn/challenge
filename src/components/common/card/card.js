@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Button from "../button/button";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import Button from "../button/button";
 
 import "./card.scss";
 import { getUserWishList } from "../../../store/user/user.actions";
