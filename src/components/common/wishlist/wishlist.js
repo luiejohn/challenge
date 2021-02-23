@@ -39,6 +39,7 @@ const WishList = ({ setCart, userWishList, userWishListCount }) => {
                       itemList={userWishList}
                       itemDetails={item}
                       key={`wishList-${item.id}`}
+                      setCart={setCart}
                     />
                   );
                 })}

@@ -31,13 +31,15 @@
 
     &-list {
       height: 130px;
-      border: 1px solid #ccc;
+
       display: flex;
       justify-content: center;
 
       & div {
         display: flex;
         flex-basis: content;
+        border: 1px solid #ccc;
+        cursor: pointer;
       }
 
       & div > * {

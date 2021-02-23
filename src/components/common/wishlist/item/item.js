@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   checkWishList,
   removeIemOnWishList,
@@ -8,7 +9,13 @@ import {
 import { getUserWishList } from "../../../../store/user/user.actions";
 import "./item.scss";
 
-const Item = ({ itemDetails, currentUser, refreshWishList }) => {
+const Item = ({
+  itemDetails,
+  currentUser,
+  refreshWishList,
+  currentCategory,
+  setCart,
+}) => {
   const removeToWishList = () => {
     removeIemOnWishList(currentUser.id, itemDetails);
     checkWishList(currentUser.id, itemDetails.id).then((res) => {
@@ -41,7 +48,14 @@ const Item = ({ itemDetails, currentUser, refreshWishList }) => {
         <div>${itemDetails.price}</div>
       </div>
 
-      <div className="wishList__items__size">Visit Page</div>
+      <div className="wishList__items__size">
+        <Link
+          to={`/category/${itemDetails.categories[0]}/item/${itemDetails.id}`}
+          onClick={() => setCart(false)}
+        >
+          Visit Page
+        </Link>
+      </div>
     </div>
   );
 };
@@ -54,6 +68,7 @@ const mapStateToProps = (state) => ({
   cartItemCount: state.cart.totalItemCount,
   totalCartPrice: state.cart.totalCartPrice,
   currentUser: state.user.currentUser,
+  currentCategory: state.category.currentCategory,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item);

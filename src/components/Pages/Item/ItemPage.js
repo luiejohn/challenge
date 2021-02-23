@@ -49,8 +49,9 @@ const ItemPage = ({
   const [selectedSize, setSelectedSize] = useState("XS");
   const [isWishListed, setWishListed] = useState(false);
   const [isModal, setModal] = useState(false);
-
+  console.log("reading");
   useEffect(() => {
+    console.log("read");
     getSingleItemData(match.params.category, match.params.id).then((res) => {
       setItemPage(res);
       setSelectedSize(res.sizes[0]);
@@ -137,8 +138,8 @@ const ItemPage = ({
     }
   };
 
-  const addToWishList = (itemId) => {
-    addItemOnWishlist(currentUser.id, itemId);
+  const addToWishList = () => {
+    addItemOnWishlist(currentUser.id, currentItem);
     checkWishList(currentUser.id, match.params.id).then((res) => {
       setWishListed(true);
     });
@@ -147,8 +148,8 @@ const ItemPage = ({
     });
   };
 
-  const removeToWishList = (itemId) => {
-    removeIemOnWishList(currentUser.id, itemId);
+  const removeToWishList = () => {
+    removeIemOnWishList(currentUser.id, currentItem);
     checkWishList(currentUser.id, match.params.id).then((res) => {
       setWishListed(false);
     });
@@ -180,9 +181,7 @@ const ItemPage = ({
               </div>
               <div className="item__image-list">
                 <div>
-                  <img src={shirt1}></img>
-                  <img src={shirt1}></img>
-                  <img src={shirt1}></img>
+                  <img src={currentItem.imageUrl}></img>
                 </div>
               </div>
             </div>
