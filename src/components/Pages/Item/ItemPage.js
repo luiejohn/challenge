@@ -227,7 +227,7 @@ const ItemPage = ({
               <SizeFilter
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}
-                sizes={currentItem.sizes}
+                sizes={currentItem ? currentItem.sizes : []}
               />
               <div>
                 <QuantityCounter

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import "./sizeFilter.scss";
 
 const SizeFilter = ({ selectedSize, setSelectedSize, sizes }) => {
+  console.log(sizes);
   return (
     <Fragment>
       <div className="filter__range__size">

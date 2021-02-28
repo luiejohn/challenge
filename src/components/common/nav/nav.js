@@ -36,6 +36,7 @@ const Navigation = ({
   setSignUp,
 }) => {
   const [isCart, setCart] = useState(false);
+  const [isCheckout, setCheckout] = useState(false);
   const [isWishListModal, setWishListModal] = useState(false);
 
   useEffect(() => {
@@ -58,12 +59,16 @@ const Navigation = ({
     if (event.keyCode === 27) {
       setSignIn(false);
       setSignUp(false);
+      setCart(false);
+      setCheckout(false);
     }
   };
 
-  const onWishListClick = () => {
-    setWishListModal(false);
-  };
+  useEffect(() => {
+    if (!isCart) {
+      setCheckout(false);
+    }
+  }, [isCart]);
 
   return (
     <Fragment>
@@ -234,10 +239,15 @@ const Navigation = ({
             />
           </div> */}
 
-          <Modal show={isCart} handleChange={setCart} width="80%">
+          <Modal
+            show={isCart}
+            handleChange={isCart ? setCart : setCheckout}
+            width="80%"
+          >
             <Cart
-              className={isCart ? "cart cart__show" : "cart cart__hide"}
               setCart={setCart}
+              setCheckout={setCheckout}
+              isCheckout={isCheckout}
             />
           </Modal>
         </div>
