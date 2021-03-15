@@ -10,20 +10,20 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 
 import { store, persistor } from "./store/store";
 
-const stripePromise = loadStripe("pk_test_6M2TvdI1SCB3HPaA9EnnMzXn");
+// const stripePromise = loadStripe("pk_test_6M2TvdI1SCB3HPaA9EnnMzXn");
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>
-        <Elements stripe={stripePromise}>
-          <App />
-        </Elements>
+        {/* <Elements stripe={stripePromise}> */}
+        <App />
+        {/* </Elements> */}
       </PersistGate>
     </BrowserRouter>
   </Provider>,

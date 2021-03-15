@@ -155,6 +155,7 @@
 
   margin-bottom: 10px;
 
+  font-family: "Open Sans";
   font-size: 1.4rem;
 
   & > * {
@@ -184,11 +185,32 @@
 
 .checkout__userDetails {
   flex: 1;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   text-align: left;
   font-size: 1.4rem;
 
   & > * {
     margin-bottom: 15px;
   }
+}
+
+// .checkOut__stripeElement {
+//   border: 1px solid #f62f5e;
+// }
+
+.StripeElement {
+  margin-bottom: 15px;
+  border-radius: 100px;
+  padding: 15px 25px;
+  border: 3px solid #ccc;
+
+  &:focus {
+    outline: none;
+    // border-bottom: 3px solid #f62f5e;
+    border: 3px solid #f62f5e;
+  }
+}
+
+.StripeElement--invalid {
+  border: 3px solid #f62f5e;
 }

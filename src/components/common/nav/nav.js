@@ -21,6 +21,10 @@ import {
 } from "../../../store/user/user.actions";
 import { getWishList } from "../../../firebase/firebase.utils";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_6M2TvdI1SCB3HPaA9EnnMzXn");
+
 const Navigation = ({
   currentUser,
   currentCategory,
@@ -244,11 +248,13 @@ const Navigation = ({
             handleChange={isCart ? setCart : setCheckout}
             width="80%"
           >
-            <Cart
-              setCart={setCart}
-              setCheckout={setCheckout}
-              isCheckout={isCheckout}
-            />
+            <Elements stripe={stripePromise}>
+              <Cart
+                setCart={setCart}
+                setCheckout={setCheckout}
+                isCheckout={isCheckout}
+              />
+            </Elements>
           </Modal>
         </div>
       </div>

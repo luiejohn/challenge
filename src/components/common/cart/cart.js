@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import "./cart.scss";
@@ -12,7 +12,9 @@ import {
   CardNumberElement,
   CardCvcElement,
   CardExpiryElement,
+  PaymentRequestButtonElement,
 } from "@stripe/react-stripe-js";
+import Stripe from "stripe";
 
 const Cart = ({
   setCart,
@@ -26,7 +28,81 @@ const Cart = ({
   console.log(cartItems);
   const stripe = useStripe();
   const elements = useElements();
-  // const options = useOptions();
+  const NStripe = new Stripe("sk_test_fTowWpfZRnhryU0lSqwihYpn");
+
+  const [paymentRequest, setPaymentRequest] = useState();
+
+  // useEffect(() => {
+  //   if (stripe) {
+  //     const pr = stripe.paymentRequest({
+  //       country: "US",
+  //       currency: "usd",
+  //       total: {
+  //         label: "Demo total",
+  //         amount: 100,
+  //       },
+  //       requestPayerName: true,
+  //       requestPayerEmail: true,
+  //     });
+
+  //     // Check the availability of the Payment Request API.
+  //     pr.canMakePayment().then((result) => {
+  //       console.log(result);
+  //       if (result) {
+  //         setPaymentRequest(pr);
+  //       }
+  //     });
+  //   }
+  // }, [stripe]);
+
+  const handleSubmit = async (event) => {
+    // Block native form submission.
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      // Stripe.js has not loaded yet. Make sure to disable
+      // form submission until Stripe.js has loaded.
+      return;
+    }
+
+    const paymentIntent = await NStripe.paymentIntents.create({
+      amount: 100,
+      currency: "usd",
+    });
+
+    // console.log(paymentIntent.client_secret);
+    // console.log("read");
+
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const cardElement = elements.getElement(
+      CardNumberElement
+      // CardCvcElement,
+      // CardExpiryElement
+    );
+
+    // Use your card Element with other Stripe.js APIs
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
+
+    if (error) {
+      console.log("[error]", error);
+    } else {
+      console.log("[PaymentMethod]", paymentMethod);
+    }
+
+    const confirmCardPayment = await stripe.confirmCardPayment(
+      paymentIntent.client_secret,
+      {
+        payment_method: paymentMethod.id,
+      }
+    );
+
+    console.log(confirmCardPayment);
+  };
 
   return (
     <div style={{ height: "550px" }}>
@@ -160,56 +236,59 @@ const Cart = ({
                     <div className="checkout__userDetails">
                       <div>User Name: {currentUser.displayName}</div>
                       <div>Email Address: {currentUser.email}</div>
-                      <div>Voucher if Any</div>
-                      <div>
+                      {/* <div>Voucher if Any</div> */}
+                      <form onSubmit={handleSubmit} id="paymentForm">
                         <CardNumberElement
                           // options={options}
-                          onReady={() => {
-                            console.log("CardNumberElement [ready]");
-                          }}
-                          onChange={(event) => {
-                            console.log("CardNumberElement [change]", event);
-                          }}
-                          onBlur={() => {
-                            console.log("CardNumberElement [blur]");
-                          }}
-                          onFocus={() => {
-                            console.log("CardNumberElement [focus]");
-                          }}
+                          className="checkOut__stripeElement"
+                          // onReady={() => {
+                          //   console.log("CardNumberElement [ready]");
+                          // }}
+                          // onChange={(event) => {
+                          //   console.log("CardNumberElement [change]", event);
+                          // }}
+                          // onBlur={() => {
+                          //   console.log("CardNumberElement [blur]");
+                          // }}
+                          // onFocus={() => {
+                          //   console.log("CardNumberElement [focus]");
+                          // }}
                         />
 
                         <CardExpiryElement
+                          className="checkOut__stripeElement"
                           // options={options}
-                          onReady={() => {
-                            console.log("CardNumberElement [ready]");
-                          }}
-                          onChange={(event) => {
-                            console.log("CardNumberElement [change]", event);
-                          }}
-                          onBlur={() => {
-                            console.log("CardNumberElement [blur]");
-                          }}
-                          onFocus={() => {
-                            console.log("CardNumberElement [focus]");
-                          }}
+                          // onReady={() => {
+                          //   console.log("CardNumberElement [ready]");
+                          // }}
+                          // onChange={(event) => {
+                          //   console.log("CardNumberElement [change]", event);
+                          // }}
+                          // onBlur={() => {
+                          //   console.log("CardNumberElement [blur]");
+                          // }}
+                          // onFocus={() => {
+                          //   console.log("CardNumberElement [focus]");
+                          // }}
                         />
 
                         <CardCvcElement
+                          className="checkOut__stripeElement"
                           // options={options}
-                          onReady={() => {
-                            console.log("CardNumberElement [ready]");
-                          }}
-                          onChange={(event) => {
-                            console.log("CardNumberElement [change]", event);
-                          }}
-                          onBlur={() => {
-                            console.log("CardNumberElement [blur]");
-                          }}
-                          onFocus={() => {
-                            console.log("CardNumberElement [focus]");
-                          }}
+                          // onReady={() => {
+                          //   console.log("CardNumberElement [ready]");
+                          // }}
+                          // onChange={(event) => {
+                          //   console.log("CardNumberElement [change]", event);
+                          // }}
+                          // onBlur={() => {
+                          //   console.log("CardNumberElement [blur]");
+                          // }}
+                          // onFocus={() => {
+                          //   console.log("CardNumberElement [focus]");
+                          // }}
                         />
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -219,9 +298,15 @@ const Cart = ({
           <div className="cart__options">
             <Button click={() => setCheckout(false)}>Back to Cart</Button>
 
-            <Button primary click={() => setCheckout(true)}>
+            {/* <Button primary click={() => setCheckout(true)}>
               Place Order
-            </Button>
+            </Button> */}
+            <button type="submit" form="paymentForm" disabled={!stripe}>
+              Pay
+            </button>
+            {/* {paymentRequest ? (
+              <PaymentRequestButtonElement options={{ paymentRequest }} />
+            ) : null} */}
           </div>
         </div>
       )}

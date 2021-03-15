@@ -9,7 +9,6 @@ import ColorSelector from "../../common/colorSelector/colorSelector";
 import Button from "../../common/button/button";
 import svg from "../../../assets/Icon/sprite.svg";
 import Loading from "../../common/loading/loading";
-import Alert from "../../common/alert/alert";
 import SignInModal from "../../common/signInModal/signInModal";
 
 import {
@@ -31,9 +30,6 @@ import {
   getWishList,
 } from "../../../firebase/firebase.utils";
 import { setCurrentItem } from "../../../store/category/category.actions";
-
-import { Carousel } from "react-responsive-carousel";
-import shirt1 from "../../../assets/images/images-shirt11.png";
 
 const ItemPage = ({
   match,
@@ -182,11 +178,11 @@ const ItemPage = ({
                             </div>
                         </Carousel> */}
               <div className="item__image-preview">
-                <img src={currentItem.imageUrl}></img>
+                <img src={currentItem.imageUrl} alt="Item Page"></img>
               </div>
               <div className="item__image-list">
                 <div>
-                  <img src={currentItem.imageUrl}></img>
+                  <img src={currentItem.imageUrl} alt="Item thumbnail"></img>
                 </div>
               </div>
             </div>
