@@ -47,7 +47,7 @@ const Category = ({
 
   return (
     <Fragment>
-      <div className="category">
+      <div className={`category category__${currentCategory}`}>
         <h1 className="category__header">
           {currentCategory ? currentCategory : "Loading ..."}
         </h1>

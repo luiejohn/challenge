@@ -1,7 +1,7 @@
 .category {
   // background-color: #fff;
   // background-image: linear-gradient(to right, #b4b4b4, #6c6c6c);
-  background-image: url("../../../assets//images/cat-header.png");
+  background-image: url("../../../assets//images/cat-header1.jpg");
   background-size: cover;
   padding: 6rem;
 
@@ -35,4 +35,36 @@
       cursor: pointer;
     }
   }
+}
+
+.category__Men {
+  // background-image: url("../../../assets//images/cat-header1-min.jpg");
+  background-image: url("https://i.ibb.co/xSqP5Z7/men-fashion1.jpg");
+  background-size: cover;
+  padding: 6rem;
+}
+
+.category__Women {
+  // background-image: url("../../../assets//images/carousel-women-min.jpg");
+  background-image: url("https://i.ibb.co/X8LrrWt/women-fashion1.jpg");
+  background-size: cover;
+  padding: 6rem;
+}
+
+.category__Kids {
+  background-image: url("https://i.ibb.co/TmjJ3wG/kids-fashion1.jpg");
+  background-size: cover;
+  padding: 6rem;
+}
+
+.category__Shoes {
+  background-image: url("https://i.ibb.co/wCD9gMv/shoes-fashion.jpg");
+  background-size: cover;
+  padding: 6rem;
+}
+
+.category__Brands {
+  background-image: url("https://i.ibb.co/DMqghqq/brand-fashion1.jpg");
+  background-size: cover;
+  padding: 6rem;
 }
