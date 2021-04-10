@@ -20,7 +20,6 @@ const Item = ({
   setTotPrice,
   totalCartPrice,
 }) => {
-  console.log(itemDetails);
   const increase = () => {
     let totalPrice = 0;
     const updatedItemList = itemList.map((item) => {

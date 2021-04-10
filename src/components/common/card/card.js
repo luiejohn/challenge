@@ -19,23 +19,33 @@ const Card = ({ match, key, item, currentUser, setModal, refreshWishList }) => {
   const [isWishListed, setWishListed] = useState(false);
 
   const addToWishList = (itemId) => {
-    addItemOnWishlist(currentUser.id, itemId);
-    checkWishList(currentUser.id, item.id).then((res) => {
-      setWishListed(true);
-    });
-    getWishList(currentUser.id).then((data) => {
-      refreshWishList(data.wishList);
-    });
+    addItemOnWishlist(currentUser.id, itemId)
+      .then((res) => {
+        checkWishList(currentUser.id, item.id).then((res) => {
+          setWishListed(true);
+        });
+      })
+      .then((res) => {
+        getWishList(currentUser.id).then((data) => {
+          refreshWishList(data.wishList);
+        });
+      });
   };
 
   const removeToWishList = (itemId) => {
-    removeIemOnWishList(currentUser.id, itemId);
-    checkWishList(currentUser.id, item.id).then((res) => {
-      setWishListed(false);
-    });
-    getWishList(currentUser.id).then((data) => {
-      refreshWishList(data.wishList);
-    });
+    removeIemOnWishList(currentUser.id, itemId)
+      .then((res) => {
+        checkWishList(currentUser.id, item.id).then((res) => {
+          setWishListed(false);
+        });
+      })
+      .then((res) => {
+        getWishList(currentUser.id).then((data) => {
+          refreshWishList(data.wishList);
+        });
+
+        console.log("read");
+      });
   };
 
   useEffect(() => {

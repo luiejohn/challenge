@@ -26,7 +26,7 @@ const Layout = ({ setUser }) => {
       //Check if user already exist using Google OAuth
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
-        const userWishlist = await createUserWishlist(userAuth);
+        // const userWishlist = await createUserWishlist(userAuth);
 
         userRef.onSnapshot((snapShot) => {
           setUser({

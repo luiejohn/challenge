@@ -25,7 +25,7 @@ const Item = ({
       refreshWishList(data.wishList);
     });
   };
-  console.log(itemDetails.categories[0]);
+
   return (
     <div className="wishList__items">
       <div className="wishList__items__item">

@@ -130,7 +130,7 @@ const ItemPage = ({
       if (isWishListed) {
         return removeToWishList(match.params.id);
       } else {
-        addToWishList(match.params.id);
+        return addToWishList(match.params.id);
       }
     } else {
       return setSignIn(true);
@@ -138,23 +138,31 @@ const ItemPage = ({
   };
 
   const addToWishList = () => {
-    addItemOnWishlist(currentUser.id, currentItem);
-    checkWishList(currentUser.id, match.params.id).then((res) => {
-      setWishListed(true);
-    });
-    getWishList(currentUser.id).then((data) => {
-      refreshWishList(data.wishList);
-    });
+    addItemOnWishlist(currentUser.id, currentItem)
+      .then((res) => {
+        checkWishList(currentUser.id, match.params.id).then((res) => {
+          setWishListed(true);
+        });
+      })
+      .then((res) => {
+        getWishList(currentUser.id).then((data) => {
+          refreshWishList(data.wishList);
+        });
+      });
   };
 
   const removeToWishList = () => {
-    removeIemOnWishList(currentUser.id, currentItem);
-    checkWishList(currentUser.id, match.params.id).then((res) => {
-      setWishListed(false);
-    });
-    getWishList(currentUser.id).then((data) => {
-      refreshWishList(data.wishList);
-    });
+    removeIemOnWishList(currentUser.id, currentItem)
+      .then((res) => {
+        checkWishList(currentUser.id, match.params.id).then((res) => {
+          setWishListed(false);
+        });
+      })
+      .then((res) => {
+        getWishList(currentUser.id).then((data) => {
+          refreshWishList(data.wishList);
+        });
+      });
   };
 
   return (

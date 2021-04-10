@@ -25,7 +25,7 @@ const Cart = ({
   totalPrice,
   currentUser,
 }) => {
-  console.log(cartItems);
+  // console.log(cartItems);
   const stripe = useStripe();
   const elements = useElements();
   const NStripe = new Stripe("sk_test_fTowWpfZRnhryU0lSqwihYpn");
@@ -101,7 +101,7 @@ const Cart = ({
       }
     );
 
-    console.log(confirmCardPayment);
+    // console.log(confirmCardPayment);
   };
 
   return (
