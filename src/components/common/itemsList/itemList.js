@@ -25,28 +25,32 @@ const ItemList = ({
 }) => {
   return (
     <Fragment>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="itemList">
-            <Filter
-              className="itemList__filter"
-              applyFilter={applyFilter}
-              sizeFilter={sizeFilter}
-              priceFilter={priceFilter}
-              clearFilter={clearFilter}
-              // priceFilterValue={priceFilterValue}
-              // priceFilterSet={priceFilterSet}
-            />
-            {shopItems.map((item) => {
-              return <Card key={item.id} item={item} setModal={setSignIn} />;
-            })}
-          </div>
+      <div className="itemList">
+        <div>
+          <Filter
+            className="itemList__filter"
+            applyFilter={applyFilter}
+            sizeFilter={sizeFilter}
+            priceFilter={priceFilter}
+            clearFilter={clearFilter}
+            // priceFilterValue={priceFilterValue}
+            // priceFilterSet={priceFilterSet}
+          />
+        </div>
+        <div>
+          {loading ? (
+            <Loading height />
+          ) : (
+            <div className="itemList__inner">
+              {shopItems.map((item) => {
+                return <Card key={item.id} item={item} setModal={setSignIn} />;
+              })}
+            </div>
+          )}
+        </div>
+      </div>
 
-          <SignInModal show={signInModal} handleChange={setSignIn} />
-        </>
-      )}
+      <SignInModal show={signInModal} handleChange={setSignIn} />
     </Fragment>
   );
 };

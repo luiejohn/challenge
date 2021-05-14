@@ -17,13 +17,17 @@ const Item = ({
   setCart,
 }) => {
   const removeToWishList = () => {
-    removeIemOnWishList(currentUser.id, itemDetails);
-    checkWishList(currentUser.id, itemDetails.id).then((res) => {
-      // TO DO
-    });
-    getWishList(currentUser.id).then((data) => {
-      refreshWishList(data.wishList);
-    });
+    removeIemOnWishList(currentUser.id, itemDetails)
+      .then((res) => {
+        checkWishList(currentUser.id, itemDetails.id).then((res) => {
+          // TO DO
+        });
+      })
+      .then((res) => {
+        getWishList(currentUser.id).then((data) => {
+          refreshWishList(data.wishList);
+        });
+      });
   };
 
   return (

@@ -1,5 +1,14 @@
-.loading__container {
+.loading__container_full {
   min-height: 70vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading__container {
+  min-height: 250px;
   width: 100%;
 
   display: flex;

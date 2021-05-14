@@ -17,7 +17,6 @@ import {
 
 const Card = ({ match, key, item, currentUser, setModal, refreshWishList }) => {
   const [isWishListed, setWishListed] = useState(false);
-
   const addToWishList = (itemId) => {
     addItemOnWishlist(currentUser.id, itemId)
       .then((res) => {
