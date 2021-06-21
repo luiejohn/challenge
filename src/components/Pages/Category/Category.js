@@ -34,10 +34,14 @@ const CategoryPage = ({
   const [itemsLoading, setItemsLoading] = useState(false);
 
   const [selectedSize, setSelectedSize] = useState("");
-  const [values, setValues] = React.useState([0, 100]);
+  const [values, setValues] = useState([0, 100]);
+  const [page, setPage] = useState(0);
+  const [pageItems, setPageItems] = useState([]);
 
   useEffect(() => {
     const collectionRef = firestore.collection(match.params.category);
+    // .orderBy("itemName")
+    // .limit(6);
     setCategory(match.params.category);
 
     try {
@@ -46,21 +50,36 @@ const CategoryPage = ({
       collectionRef.get().then((items) => {
         const Items = convertCollectionDataToMap(items);
         setItems(Items.dataCollection);
+        if (Items.dataCollection.length !== 0) {
+          setPage(1);
+          setPageItems(Items.dataCollection.slice(0, 6));
+        }
         setSubCat(Items.subCategories);
         setPageLoading(false);
       });
-
-      // collectionRef.onSnapshot(async (snapshop) => {
-      //   const Items = await convertCollectionDataToMap(snapshop);
-      //   setItems(Items.dataCollection);
-
-      //   setSubCat(Items.subCategories);
-      //   setLoading(false);
-      // });
     } catch (error) {
       console.log(error);
     }
   }, [match.params.category]);
+
+  const nextPage = () => {
+    if (page >= Math.ceil(shopItems.length / 6)) {
+    } else {
+      const nextItems = shopItems.slice(page * 6, page * 6 + 6);
+      setPageItems(nextItems);
+      setPage(page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (page === 1 || page * 6 - 6 <= 0) {
+    } else {
+      const nextItems = shopItems.slice((page - 2) * 6, (page - 1) * 6);
+      console.log(nextItems);
+      setPageItems(nextItems);
+      setPage(page - 1);
+    }
+  };
 
   const applyFilter = (subcat, size, price) => {
     const collectionRef = firestore.collection(match.params.category);
@@ -95,7 +114,6 @@ const CategoryPage = ({
     }
 
     if (price && !size) {
-      console.log("read2");
       query = collectionRef
         .where("price", ">=", price[0])
         .where("price", "<=", price[1]);
@@ -106,6 +124,10 @@ const CategoryPage = ({
       query.get().then((items) => {
         const Items = convertCollectionDataToMap(items);
         setItems(Items.dataCollection);
+        if (Items.dataCollection.length !== 0) {
+          setPage(1);
+          setPageItems(Items.dataCollection.slice(0, 6));
+        }
         setItemsLoading(false);
       });
     } catch (error) {
@@ -125,6 +147,10 @@ const CategoryPage = ({
       collectionRef.get().then((items) => {
         const Items = convertCollectionDataToMap(items);
         setItems(Items.dataCollection);
+        if (Items.dataCollection.length !== 0) {
+          setPage(1);
+          setPageItems(Items.dataCollection.slice(0, 6));
+        }
         setSubCat(Items.subCategories);
         setPageLoading(false);
       });
@@ -148,9 +174,13 @@ const CategoryPage = ({
               clearFilter={clearFilter}
             />
             <ItemList
+              currentPage={page}
+              totalPage={Math.ceil(shopItems.length / 6)}
+              nextPage={nextPage}
+              prevPage={prevPage}
               sizeFilter={{ selectedSize, setSelectedSize }}
               priceFilter={{ values, setValues }}
-              shopItems={shopItems}
+              shopItems={pageItems}
               loading={itemsLoading}
               applyFilter={applyFilter}
               clearFilter={clearFilter}
